@@ -1,3 +1,9 @@
+:root {
+  --font-nunito: "Nunito", sans-serif;
+  --font-playfair_display: "Playfair Display", serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-rostema: "Rostema", cursive; /* You need to host/import this manually */
+}
 html,
 body {
   max-width: 100vw;
@@ -13,4 +19,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.MuiContainer-root {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
 }

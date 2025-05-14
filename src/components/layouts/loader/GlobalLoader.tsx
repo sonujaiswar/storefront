@@ -9,6 +9,7 @@ export default function GlobalLoader() {
 
   useEffect(() => {
     BProgress.start();
+    BProgress.configure({ showSpinner: false, template: "bar" });
 
     const timer = setTimeout(() => {
       BProgress.done();
