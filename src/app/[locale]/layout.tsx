@@ -6,7 +6,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import GlobalLoader from "@/components/layouts/loader/GlobalLoader";
-import StateUI from "@/helper/StateUI";
+import StateUI from "@/app/system/StateUI";
 
 import localFont from "next/font/local";
 const Rostema = localFont({
