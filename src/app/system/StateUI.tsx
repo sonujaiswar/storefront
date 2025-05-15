@@ -2,7 +2,8 @@
 import Protectedmode from "@/app/system/Protectedmode";
 import Unprotectedmode from "@/app/system/Unprotectedmode";
 import { persistor, store } from "@/controllers/store";
-import attirebellaTheme from "@/styles/attirebellatheme";
+import theme from "@/styles/attirebellatheme";
+
 import { AppProgressProvider as ProgressProvider } from "@bprogress/next";
 import { ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
@@ -12,13 +13,14 @@ export default function StateUI({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <ThemeProvider theme={attirebellaTheme}>
+      <ThemeProvider theme={theme}>
         <ProgressProvider
           height="4px"
-          color={attirebellaTheme.palette.primary.main}
+          color={theme.palette.primary.main}
           options={{ showSpinner: false }}
           shallowRouting
           startOnLoad
+          disableSameURL
         >
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>

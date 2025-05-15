@@ -7,10 +7,5 @@ export default function Unprotectedmode({
   const isProtectedMode = useSelector(
     (state: RootState) => state.settings.isProtectedMode
   );
-  return (
-    <>
-      {isProtectedMode === false && <h1>Unprotected Mode</h1>}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

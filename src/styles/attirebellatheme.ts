@@ -9,7 +9,7 @@ import { createTheme } from "@mui/material/styles";
 //   }
 // }
 
-const attirebellaTheme = createTheme({
+const theme = createTheme({
   typography: {
     fontFamily: "var(--font-nunito)",
 
@@ -64,4 +64,4 @@ const attirebellaTheme = createTheme({
   },
 });
 
-export default attirebellaTheme;
+export default theme;

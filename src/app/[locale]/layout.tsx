@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import GlobalLoader from "@/components/layouts/loader/GlobalLoader";
+
 import StateUI from "@/app/system/StateUI";
 
 import localFont from "next/font/local";
@@ -34,7 +34,6 @@ export default async function LocaleLayout({
       <body className={` ${Rostema.variable} `}>
         <NextIntlClientProvider>
           <StateUI>{children}</StateUI>
-          {/* <GlobalLoader /> */}
         </NextIntlClientProvider>
       </body>
     </html>
