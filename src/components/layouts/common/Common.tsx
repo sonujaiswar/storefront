@@ -6,11 +6,8 @@ import Box from "@mui/material/Box";
 import Header from "@/components/ui/navbar/header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
-import {
-  settingsIsMobile,
-  settingsToggleDrawer,
-} from "@/controllers/slices/settings";
-import { useMediaQuery } from "@mui/material";
+import { settingsToggleDrawer } from "@/controllers/slices/settings";
+
 import DrawerMode from "@/components/ui/sidebar/drawer";
 
 const drawerWidth = 240;
@@ -46,16 +43,8 @@ const Main = styled("main", {
 export default function Common({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const theme = useTheme();
   const open = useSelector((state: RootState) => state.settings.isDrawerOpen);
   const dispatch = useDispatch();
-  const checkIsMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-  React.useEffect(() => {
-    if (checkIsMobile) {
-      dispatch(settingsIsMobile(true));
-    }
-  }, [checkIsMobile]);
   const isMobile = useSelector((state: RootState) => state.settings.isMobile);
   const handleDrawerClose = () => {
     dispatch(settingsToggleDrawer());

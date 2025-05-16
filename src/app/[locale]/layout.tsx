@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import StateUI from "@/app/system/StateUI";
 
 import localFont from "next/font/local";
+import ResponsiveWatcher from "@/helper/ResponsiveWatcher";
 const Rostema = localFont({
   src: "./fonts/Rostema.woff",
   variable: "--font-rostema",
@@ -33,7 +34,10 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={` ${Rostema.variable} `}>
         <NextIntlClientProvider>
-          <StateUI>{children}</StateUI>
+          <StateUI>
+            <ResponsiveWatcher />
+            {children}
+          </StateUI>
         </NextIntlClientProvider>
       </body>
     </html>
