@@ -1,8 +1,8 @@
 export interface SettingState {
   isProtectedMode: boolean;
   isDrawerOpen: boolean;
-  isNavBarHeaderHeight: number;
-  isDrawerWidth: number;
+  isMobile: boolean;
+
   //   isLanguageVisible: boolean;
   //   isCurrencyVisible: boolean;
 }

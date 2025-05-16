@@ -4,8 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const settingsState: SettingState = {
   isProtectedMode: false,
   isDrawerOpen: false,
-  isNavBarHeaderHeight: 8,
-  isDrawerWidth: 240,
+  isMobile: false,
 };
 
 export const settingsSlice = createSlice({
@@ -18,12 +17,15 @@ export const settingsSlice = createSlice({
     settingsToggleDrawer: (state) => {
       state.isDrawerOpen = !state.isDrawerOpen;
     },
+    settingsIsMobile: (state, action: PayloadAction<boolean>) => {
+      state.isMobile = action.payload;
+    },
     settingsToggleMode: (state) => {
       state.isProtectedMode = !state.isProtectedMode;
     },
   },
 });
 
-export const { settingsToggleDrawer, settingsToggleMode } =
+export const { settingsToggleDrawer, settingsIsMobile, settingsToggleMode } =
   settingsSlice.actions;
 export default settingsSlice.reducer;

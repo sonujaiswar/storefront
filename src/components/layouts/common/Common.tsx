@@ -19,8 +19,12 @@ import MailIcon from "@mui/icons-material/Mail";
 import Header from "@/components/ui/navbar/header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
-import { settingsToggleDrawer } from "@/controllers/slices/settings";
+import {
+  settingsIsMobile,
+  settingsToggleDrawer,
+} from "@/controllers/slices/settings";
 import { useMediaQuery } from "@mui/material";
+import DrawerMode from "@/components/ui/sidebar/drawer";
 
 const drawerWidth = 240;
 
@@ -52,12 +56,20 @@ const Main = styled("main", {
     }),
 }));
 
-export default function Common() {
+export default function Common({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const theme = useTheme();
   const open = useSelector((state: RootState) => state.settings.isDrawerOpen);
   const dispatch = useDispatch();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const checkIsMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  React.useEffect(() => {
+    if (checkIsMobile) {
+      dispatch(settingsIsMobile(true));
+    }
+  }, [checkIsMobile]);
+  const isMobile = useSelector((state: RootState) => state.settings.isMobile);
   const handleDrawerClose = () => {
     dispatch(settingsToggleDrawer());
   };
@@ -65,69 +77,16 @@ export default function Common() {
   return (
     <Box sx={{ display: "flex" }} component={"section"}>
       <Header />
-
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant={isMobile ? "temporary" : "persistent"}
-        anchor="left"
+      <DrawerMode
+        drawerWidth={drawerWidth}
+        isMobile={isMobile}
         open={open}
-        component={"aside"}
-        ModalProps={{
-          keepMounted: true,
-        }}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+        handleDrawerClose={handleDrawerClose}
+      />
 
       <Main open={open} ismobile={isMobile}>
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit...
-        </Typography>
+        {children}
       </Main>
     </Box>
   );

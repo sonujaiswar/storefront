@@ -8,8 +8,6 @@ export default function HomePage() {
   return (
     <>
       <Common>
-        <Typography variant="h1">Attirebella</Typography>
-        <Typography>Attirebella</Typography>
         <h1>{t("title")}</h1>
         <Link href="/about">{t("about")}</Link>
       </Common>

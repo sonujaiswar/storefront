@@ -9,10 +9,14 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Attirebella from "@/components/layouts/brand/Attirebella";
 import { useDispatch } from "react-redux";
-import { settingsToggleDrawer } from "@/controllers/slices/settings";
+import {
+  settingsToggleDrawer,
+  settingsToggleMode,
+} from "@/controllers/slices/settings";
 
 export default function Header() {
   const dispatch = useDispatch();
+
   return (
     <AppBar
       position="fixed"
@@ -33,7 +37,9 @@ export default function Header() {
           <MenuIcon />
         </IconButton>
         <Attirebella />
-        <Button color="inherit">Login</Button>
+        <Button color="inherit" onClick={() => dispatch(settingsToggleMode())}>
+          Login
+        </Button>
       </Toolbar>
     </AppBar>
   );
