@@ -15,9 +15,11 @@ const NavigationRoutes = {
     text: "Forgot Password",
   },
   dashboardPage: { url: "/dashboard", icon: "", text: "Dashboard" },
+  profilePage: { url: "/profile", icon: "", text: "Profile" },
   orderPage: { url: "/order", icon: "", text: "Order" },
-  securityPage: { url: "/dashboard/secure", icon: "", text: "Security" },
-  addressPage: { url: "/dashboard/address", icon: "", text: "Address" },
+  securityPage: { url: "/secure", icon: "", text: "Security" },
+  favoritePage: { url: "/favorite", icon: "", text: "Favorite" },
+  addressPage: { url: "/address", icon: "", text: "Address" },
   helpPage: { url: "/helpdesk", icon: "", text: "Helpdesk" },
   contactPage: { url: "/contact", icon: "", text: "Contact" },
 };

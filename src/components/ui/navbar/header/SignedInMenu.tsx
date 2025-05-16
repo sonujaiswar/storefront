@@ -13,6 +13,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Avatar from "@mui/material/Avatar";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { NavigationRoutes } from "@/constants/NavigationRoutes";
+import { Box } from "@mui/material";
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
@@ -96,32 +99,82 @@ export default function SignedInMenu() {
         onClose={handleClose}
         disableScrollLock
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <SignedInMenuAction
+          handleClose={handleClose}
+          href={NavigationRoutes.dashboardPage.url}
+        >
           <DashboardIcon />
           {t("account")}
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        </SignedInMenuAction>
+
+        <SignedInMenuAction
+          href={NavigationRoutes.profilePage.url}
+          handleClose={handleClose}
+        >
           <AccountCircleIcon />
           {t("profile")}
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        </SignedInMenuAction>
+        <SignedInMenuAction
+          href={NavigationRoutes.addressPage.url}
+          handleClose={handleClose}
+        >
           <LocationPinIcon />
           {t("address")}
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        </SignedInMenuAction>
+
+        <SignedInMenuAction
+          href={NavigationRoutes.favoritePage.url}
+          handleClose={handleClose}
+        >
           <FavoriteIcon />
           {t("favorites")}
-        </MenuItem>
+        </SignedInMenuAction>
+
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        {/* <MenuItem onClick={handleClose} disableRipple>
           <MoreHorizIcon />
           {t("more")}
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        </MenuItem> */}
+        <SignedInMenuAction
+          href={NavigationRoutes.signoutPage.url}
+          handleClose={handleClose}
+        >
           <LogoutIcon />
           {t("logout")}
-        </MenuItem>
+        </SignedInMenuAction>
       </StyledMenu>
     </>
+  );
+}
+
+function SignedInMenuAction({
+  children,
+  href,
+  handleClose,
+}: Readonly<{
+  children: React.ReactNode;
+  href: string;
+  handleClose: () => void;
+}>) {
+  return (
+    <MenuItem onClick={handleClose} disableRipple sx={{ p: 0 }}>
+      <Box
+        component={Link}
+        href={href}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          width: "100%",
+
+          textDecoration: "none",
+          color: "inherit",
+          px: 2, // match MenuItem padding
+          py: 0.7,
+        }}
+      >
+        {children}
+      </Box>
+    </MenuItem>
   );
 }
