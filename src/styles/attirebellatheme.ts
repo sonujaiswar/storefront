@@ -49,6 +49,7 @@ const theme = createTheme({
         style: {
           fontWeight: "900",
           fontFamily: "var(--font-roboto)",
+          textTransform: "none",
         },
       },
     },

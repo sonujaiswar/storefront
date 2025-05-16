@@ -3,5 +3,17 @@
     "title": "Attirebella - Gracefully showcasing traditional and modern attire",
     "description": "Discover a world of timeless elegance and timeless fashion",
     "about": "Go to the about page"
+  },
+  "HeaderButton": {
+    "login": "Sign in",
+    "cart": "Cart"
+  },
+  "SignedDropDownOptions": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "account": "Account",
+    "favorites": "Favorites",
+    "address": "Address",
+    "more": "More"
   }
 }
