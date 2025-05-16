@@ -12,7 +12,7 @@ export default function Dashboardmenu() {
   return (
     <>
       <List>
-        {["Explore all", "About", "Help", "Contact"].map((text, index) => (
+        {["Explore all", "Offers", "Help", "Contact"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
