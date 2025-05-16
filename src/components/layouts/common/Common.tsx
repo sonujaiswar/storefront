@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
 import { settingsToggleDrawer } from "@/controllers/slices/settings";
 
-import DrawerMode from "@/components/ui/sidebar/drawer";
+import DrawerMode from "@/components/layouts/sidebar/DrawerMode";
 
 const drawerWidth = 240;
 
