@@ -5,7 +5,7 @@ export default function Attirebella() {
     <>
       <Link href={"/"}>
         <Image
-          src="./attirebella.svg"
+          src="/attirebella.svg"
           alt="Attirebella"
           priority
           width={170}

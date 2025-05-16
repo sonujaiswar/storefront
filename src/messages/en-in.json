@@ -15,5 +15,10 @@
     "favorites": "Favorites",
     "address": "Address",
     "more": "More"
+  },
+  "logoutPage": {
+    "title": "You have been logged out",
+    "description": "Thank you for visiting! We hope to see you again soon.",
+    "buttonText": "Shop Now"
   }
 }
