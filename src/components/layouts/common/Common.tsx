@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Header from "@/components/ui/navbar/header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
-import { settingsToggleDrawer } from "@/controllers/slices/settings";
+import { settingsToggleDrawer } from "@/controllers/slices/settingsSlice";
 
 import DrawerMode from "@/components/layouts/sidebar/DrawerMode";
 import Unprotectedmode from "@/app/system/Unprotectedmode";

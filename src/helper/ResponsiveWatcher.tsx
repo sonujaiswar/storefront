@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useMediaQuery, useTheme } from "@mui/material";
-import { settingsIsMobile } from "@/controllers/slices/settings";
+import { settingsIsMobile } from "@/controllers/slices/settingsSlice";
 
 const ResponsiveWatcher = () => {
   const theme = useTheme();

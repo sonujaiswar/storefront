@@ -1,5 +1,4 @@
 export interface SettingState {
-  isProtectedMode: boolean;
   isDrawerOpen: boolean;
   isMobile: boolean;
 

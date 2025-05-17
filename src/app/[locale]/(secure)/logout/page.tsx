@@ -16,15 +16,20 @@ import Link from "next/link";
 
 import Attirebella from "@/components/layouts/brand/Attirebella";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
+import { useDispatch } from "react-redux";
+
+import { sessionReset } from "@/controllers/slices/sessionSlice";
 
 const LogoutPage = () => {
   const router = useRouter();
   const redirectUrl = NavigationRoutes.homePage.url;
   const t = useTranslations("logoutPage");
+  const dispatch = useDispatch();
   //   const { logOut } = useLogOut(); // ✅ Call the hook to get logOut function
 
   // Run logout only once on mount
   useEffect(() => {
+    dispatch(sessionReset());
     //logOut(); // ✅ Call logout from hook
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

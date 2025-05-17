@@ -34,7 +34,7 @@ export default function DrawerMode({
   const theme = useTheme();
 
   const isProtected = useSelector(
-    (state: RootState) => state.settings.isProtectedMode
+    (state: RootState) => state.session.isProtectedMode
   );
 
   return (

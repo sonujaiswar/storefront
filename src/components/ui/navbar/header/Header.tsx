@@ -9,11 +9,12 @@ import Attirebella from "@/components/layouts/brand/Attirebella";
 import Box from "@mui/material/Box";
 
 import { useDispatch, useSelector } from "react-redux";
-import { settingsToggleDrawer } from "@/controllers/slices/settings";
+import { settingsToggleDrawer } from "@/controllers/slices/settingsSlice";
 import { RootState } from "@/types/stateTypes";
 import Action from "./Action";
-import { settingsToggleMode } from "@/controllers/slices/settings";
+
 import Button from "@mui/material/Button";
+import { sessionToggleMode } from "@/controllers/slices/sessionSlice";
 export default function Header() {
   const dispatch = useDispatch();
   const isDrawerActive = useSelector(
@@ -41,10 +42,7 @@ export default function Header() {
             {isDrawerActive && isMobile ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Attirebella />
-          <Button
-            color="inherit"
-            onClick={() => dispatch(settingsToggleMode())}
-          >
+          <Button color="inherit" onClick={() => dispatch(sessionToggleMode())}>
             Auth
           </Button>
         </Box>

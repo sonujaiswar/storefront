@@ -10,11 +10,11 @@ import { RootState } from "@/types/stateTypes";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
 import { useTranslations } from "next-intl";
 import SignedInMenu from "./SignedInMenu";
-import { cartToggleItem } from "@/controllers/slices/cart";
+import { cartToggleItem } from "@/controllers/slices/cartSlice";
 
 export default function Action() {
-  const isProtectedMode = useSelector(
-    (state: RootState) => state.settings.isProtectedMode
+  const isAuth = useSelector(
+    (state: RootState) => state.session.isAuthenticated
   );
   const t = useTranslations("HeaderButton");
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export default function Action() {
           <ShoppingCartIcon />
         </IconButton>
       </Tooltip>
-      {isProtectedMode ? (
+      {isAuth ? (
         <SignedInMenu />
       ) : (
         <Button

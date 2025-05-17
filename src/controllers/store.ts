@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import settingsReducer from "./slices/settings"; // example slice
-import cartReducer from "./slices/cart"; // example slice
+import settingsReducer from "./slices/settingsSlice"; // example slice
+import cartReducer from "./slices/cartSlice"; // example slice
+import sessionReducer from "./slices/sessionSlice"; // example slice
 
 // store.ts
 import { persistStore, persistReducer } from "redux-persist";
@@ -10,6 +11,7 @@ import { combineReducers } from "redux";
 const rootReducer = combineReducers({
   settings: settingsReducer,
   cart: cartReducer,
+  session: sessionReducer,
   // Add more slices here
 });
 
