@@ -3,9 +3,17 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 const NavigationRoutes = {
   homePage: { url: "/", icon: "", text: "Home" },
   cartPage: { url: "/cart", icon: "", text: "Cart" },
-  productsPage: { url: "/products", icon: "", text: "Products" },
-  offersPage: { url: "/offers", icon: "", text: "Offers" },
-  trendingPage: { url: "/trending", icon: "", text: "Trending" },
+  productsPage: {
+    url: "/products",
+    icon: "",
+    text: "navigationRoutes.products",
+  },
+  offersPage: { url: "/offers", icon: "", text: "navigationRoutes.offers" },
+  trendingPage: {
+    url: "/trending",
+    icon: "",
+    text: "navigationRoutes.trending",
+  },
   signinPage: { url: "/signin", icon: <LoginIcon />, text: "Sign In" },
   signupPage: { url: "/signup", icon: <PersonAddIcon />, text: "Sign Up" },
   signoutPage: { url: "/logout", icon: "", text: "Sign Out" },

@@ -16,8 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 // import { productMinMax } from "@/constants/links";
 const productMinMax = {
   min: 0,
-  max: 1000,
+  max: 100000,
 };
+
 const minPrice = productMinMax.min;
 const maxPrice = productMinMax.max;
 export default function FilterItem() {
@@ -62,7 +63,7 @@ export default function FilterItem() {
     <>
       <List component="nav" aria-label="menu list">
         <ListSubheader component="div" id="nested-list-subheader">
-          Filter Search
+          Filters
         </ListSubheader>
 
         {/* Price Range Filter */}
@@ -70,15 +71,16 @@ export default function FilterItem() {
           <ListItemText primary="Price Range" />
         </ListItem>
 
-        <ListItem sx={{ px: 4 }}>
+        <ListItem sx={{ p: 4 }}>
           <Slider
             value={priceRange}
             onChange={handlePriceChange}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="on"
             getAriaValueText={valuetext}
             min={productMinMax.min}
             max={productMinMax.max}
             valueLabelFormat={valuetext}
+            aria-label="Always visible"
           />
         </ListItem>
         <Divider />
@@ -88,7 +90,7 @@ export default function FilterItem() {
           <ListItemText primary="Select Colour" />
         </ListItem>
 
-        <ListItem sx={{ px: 4 }}>
+        <ListItem>
           <ToggleButtonGroup
             value={selectedColor}
             exclusive
@@ -112,7 +114,6 @@ export default function FilterItem() {
             />
           </ToggleButtonGroup>
         </ListItem>
-        <Divider />
       </List>
     </>
   );

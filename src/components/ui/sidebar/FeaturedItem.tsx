@@ -1,17 +1,14 @@
 import React from "react";
 import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListSubheader from "@mui/material/ListSubheader";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import CategoryIcon from "@mui/icons-material/Category";
-import Link from "next/link";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
-
+import FeaturedItemListSkeleton from "@/components/skeletons/FeaturedItemListSkeleton";
+const FeaturedItemList = React.lazy(() => import("./FeaturedItemList"));
 export default function FeaturedItem() {
   return (
     <>
@@ -19,29 +16,26 @@ export default function FeaturedItem() {
         <ListSubheader component="div" id="nested-list-subheader">
           Featured Items
         </ListSubheader>
-        <ListItemButton>
-          <ListItemIcon>
-            <WhatshotIcon />
-          </ListItemIcon>
-          <ListItemText primary="Trending" />
-        </ListItemButton>
-        <Divider />
-        <ListItemButton>
-          <ListItemIcon>
-            <LocalOfferIcon />
-          </ListItemIcon>
-          <ListItemText primary="Offer" />
-        </ListItemButton>
-        <Divider />
-        <ListItemButton
-          LinkComponent={Link}
-          href={NavigationRoutes.productsPage.url}
-        >
-          <ListItemIcon>
-            <CategoryIcon />
-          </ListItemIcon>
-          <ListItemText primary="Explore All" />
-        </ListItemButton>
+        <React.Suspense fallback={<FeaturedItemListSkeleton />}>
+          <FeaturedItemList
+            href={NavigationRoutes.trendingPage.url}
+            text={NavigationRoutes.trendingPage.text}
+            icon={<WhatshotIcon />}
+          />
+          <Divider />
+          <FeaturedItemList
+            href={NavigationRoutes.offersPage.url}
+            text={NavigationRoutes.offersPage.text}
+            icon={<LocalOfferIcon />}
+          />
+
+          <Divider />
+          <FeaturedItemList
+            href={NavigationRoutes.productsPage.url}
+            text={NavigationRoutes.productsPage.text}
+            icon={<CategoryIcon />}
+          />
+        </React.Suspense>
       </List>
     </>
   );

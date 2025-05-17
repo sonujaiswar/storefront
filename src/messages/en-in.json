@@ -20,5 +20,12 @@
     "title": "You have been logged out",
     "description": "Thank you for visiting! We hope to see you again soon.",
     "buttonText": "Shop Now"
+  },
+  "navigationRoutes": {
+    "trending": "Trending",
+    "products": "Explore all",
+    "offers": "Offers",
+    "signin": "Sign in",
+    "cart": "Cart"
   }
 }
