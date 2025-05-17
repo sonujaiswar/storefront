@@ -41,5 +41,17 @@
     "ordersummaryshipping": "Shipping",
     "ordersummarysubtotal": "Subtotal",
     "ordersummaryaction": "Place Order"
+  },
+  "signinPage": {
+    "title": "Sign in",
+    "description": "Please sign in to continue your personalized shopping experience.",
+    "useSocial": "Prefer social sign-in?",
+    "useEmail": "Prefer using email and password?",
+    "useEmailButton": "Use email and password",
+    "textfieldEmail": "Email",
+    "textfieldPassword": "Password",
+    "emailButtonText": "Sign in with Email",
+    "socialGoogleButtonText": "Sign in with Google",
+    "socialFacebookButtonText": "Sign in with Facebook"
   }
 }
