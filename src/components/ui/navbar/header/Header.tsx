@@ -45,7 +45,7 @@ export default function Header() {
             color="inherit"
             onClick={() => dispatch(settingsToggleMode())}
           >
-            Change
+            Auth
           </Button>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

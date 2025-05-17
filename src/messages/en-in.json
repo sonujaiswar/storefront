@@ -27,5 +27,19 @@
     "offers": "Offers",
     "signin": "Sign in",
     "cart": "Cart"
+  },
+
+  "cartPage": {
+    "title": "Shopping cart",
+    "empty": "Your cart is empty",
+    "emptymessage": "Please continue to shopping.",
+    "continuebutton": "Shop Now",
+    "itemsincart": "Cart items",
+    "cartordersummary": "Order summary",
+    "ordersummaryoriginalprice": "Original Price",
+    "ordersummarygstperslab": "GST (per item slab)",
+    "ordersummaryshipping": "Shipping",
+    "ordersummarysubtotal": "Subtotal",
+    "ordersummaryaction": "Place Order"
   }
 }
