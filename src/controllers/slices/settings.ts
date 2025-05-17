@@ -23,9 +23,16 @@ export const settingsSlice = createSlice({
     settingsToggleMode: (state) => {
       state.isProtectedMode = !state.isProtectedMode;
     },
+    settingSetProtectedMode: (state, action: PayloadAction<boolean>) => {
+      state.isProtectedMode = action.payload;
+    },
   },
 });
 
-export const { settingsToggleDrawer, settingsIsMobile, settingsToggleMode } =
-  settingsSlice.actions;
+export const {
+  settingsToggleDrawer,
+  settingsIsMobile,
+  settingsToggleMode,
+  settingSetProtectedMode,
+} = settingsSlice.actions;
 export default settingsSlice.reducer;

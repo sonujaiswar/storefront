@@ -9,6 +9,7 @@ import { RootState } from "@/types/stateTypes";
 import { settingsToggleDrawer } from "@/controllers/slices/settings";
 
 import DrawerMode from "@/components/layouts/sidebar/DrawerMode";
+import Unprotectedmode from "@/app/system/Unprotectedmode";
 
 const drawerWidth = 240;
 
@@ -51,19 +52,21 @@ export default function Common({
   };
 
   return (
-    <Box sx={{ display: "flex" }} component={"section"}>
-      <Header />
-      <DrawerMode
-        drawerWidth={drawerWidth}
-        isMobile={isMobile}
-        open={open}
-        handleDrawerClose={handleDrawerClose}
-      />
+    <Unprotectedmode>
+      <Box sx={{ display: "flex" }} component={"section"}>
+        <Header />
+        <DrawerMode
+          drawerWidth={drawerWidth}
+          isMobile={isMobile}
+          open={open}
+          handleDrawerClose={handleDrawerClose}
+        />
 
-      <Main open={open} ismobile={isMobile}>
-        <DrawerHeader />
-        {children}
-      </Main>
-    </Box>
+        <Main open={open} ismobile={isMobile}>
+          <DrawerHeader />
+          {children}
+        </Main>
+      </Box>
+    </Unprotectedmode>
   );
 }

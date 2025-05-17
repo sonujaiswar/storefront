@@ -20,6 +20,9 @@ export default function Action() {
   const dispatch = useDispatch();
   return (
     <>
+      <Button LinkComponent={Link} href={NavigationRoutes.dashboardPage.url}>
+        Dasboard
+      </Button>
       <Button
         color="inherit"
         onClick={() => {

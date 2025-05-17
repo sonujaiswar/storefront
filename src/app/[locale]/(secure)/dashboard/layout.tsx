@@ -1,3 +1,4 @@
+import Protectedmode from "@/app/system/Protectedmode";
 import Common from "@/components/layouts/common/Common";
 
 export default function Dashboardlayout({
@@ -5,7 +6,9 @@ export default function Dashboardlayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Common>{children}</Common>
+      <Protectedmode>
+        <Common>{children}</Common>
+      </Protectedmode>
     </>
   );
 }

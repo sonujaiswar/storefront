@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import Protectedmode from "@/app/system/Protectedmode";
-import Unprotectedmode from "@/app/system/Unprotectedmode";
+
 import { persistor, store } from "@/controllers/store";
 import theme from "@/styles/attirebellatheme";
 
@@ -74,9 +73,7 @@ export default function StateUI({
       >
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <Unprotectedmode>
-              <Protectedmode>{children}</Protectedmode>
-            </Unprotectedmode>
+            {children}
           </PersistGate>
         </Provider>
       </ProgressProvider>
