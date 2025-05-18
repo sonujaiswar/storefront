@@ -10,11 +10,17 @@ export default function signUpPage() {
         <Typography variant="h4" align="center">
           {t("title")}
         </Typography>
-        <Typography></Typography>
-        <form>
+        <Typography>{t("description")}</Typography>
+        <Box component={"form"}>
           <TextField
-            label="Username"
-            name="username"
+            label="First name"
+            name="Firstname"
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Last name"
+            name="Lastname"
             fullWidth
             margin="normal"
           />
@@ -42,8 +48,8 @@ export default function signUpPage() {
           >
             {t("buttonText")}
           </Button>
-        </form>
-        <Button variant="contained" LinkComponent={Link} href="/signin">
+        </Box>
+        <Button variant="text" LinkComponent={Link} href="/signin">
           {t("buttonTextSignIn")}
         </Button>
       </Box>

@@ -43,16 +43,16 @@
     "ordersummaryaction": "Place Order"
   },
   "signinPage": {
-    "title": "Sign in",
-    "description": "Please sign in to continue your personalized shopping experience.",
+    "title": "Welcome Back!",
+    "description": "Sign in to unlock a shopping experience tailored just for you.",
     "useSocial": "Prefer social sign-in?",
     "useEmail": "Prefer using email and password?",
     "useEmailButton": "Use email and password",
     "textfieldEmail": "Email",
     "textfieldPassword": "Password",
     "emailButtonText": "Sign in with Email",
-    "socialGoogleButtonText": "Sign in with Google",
-    "socialFacebookButtonText": "Sign in with Facebook",
+    "socialGoogleButtonText": "Continue with Google",
+    "socialFacebookButtonText": "Continue with Facebook",
     "signUpAction": "Don't have an account? click here..."
   },
   "signupPage": {
