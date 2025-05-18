@@ -1,3 +1,5 @@
+"use client";
+
 import {
   List,
   ListItem,
@@ -6,35 +8,38 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { usePathname, useRouter } from "next/navigation";
 import { secureRoutes } from "@/constants/SecureRoutes";
+import { useDispatch, useSelector } from "react-redux";
+import { utilSetStripLocale } from "@/controllers/slices/utilSlice";
+import { RootState } from "@/types/stateTypes";
 
 export default function Mainmenu() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(utilSetStripLocale(pathname));
+  }, [pathname]);
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    setSelectedIndex(index);
-  };
-
+  const stripedPathname = useSelector((state: RootState) => state.utils.path);
   return (
     <List>
-      {secureRoutes.map((obj, index) => (
-        <ListItem key={index} disablePadding>
-          <ListItemButton
-            selected={selectedIndex === index}
-            onClick={(event) => handleListItemClick(event, index)}
-          >
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={obj.text} />
-          </ListItemButton>
-        </ListItem>
-      ))}
+      {secureRoutes.map((obj, index) => {
+        const isSelected = stripedPathname === obj.url;
+
+        return (
+          <ListItem key={index} disablePadding>
+            <ListItemButton
+              selected={isSelected}
+              onClick={() => router.push(obj.url)}
+            >
+              <ListItemIcon>{obj.icon}</ListItemIcon>
+              <ListItemText primary={obj.text} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
     </List>
   );
 }
