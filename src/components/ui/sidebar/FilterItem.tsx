@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { productMinMax } from "@/constants/links";
 const productMinMax = {
   min: 0,
-  max: 100000,
+  max: 10000,
 };
 
 const minPrice = productMinMax.min;
@@ -71,16 +71,17 @@ export default function FilterItem() {
           <ListItemText primary="Price Range" />
         </ListItem>
 
-        <ListItem sx={{ p: 4 }}>
+        <ListItem>
           <Slider
             value={priceRange}
             onChange={handlePriceChange}
-            valueLabelDisplay="on"
+            valueLabelDisplay="auto"
             getAriaValueText={valuetext}
             min={productMinMax.min}
             max={productMinMax.max}
             valueLabelFormat={valuetext}
             aria-label="Always visible"
+            sx={{ width: "80%", mx: "auto" }}
           />
         </ListItem>
         <Divider />

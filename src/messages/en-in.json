@@ -26,7 +26,16 @@
     "products": "Explore all",
     "offers": "Offers",
     "signin": "Sign in",
-    "cart": "Cart"
+    "cart": "Cart",
+    "helpdesk": "Helpdesk"
+  },
+  "secureNavigationRoutes": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "order": "Order",
+    "favorite": "Favorite",
+    "address": "Address",
+    "secure": "Secure"
   },
 
   "cartPage": {

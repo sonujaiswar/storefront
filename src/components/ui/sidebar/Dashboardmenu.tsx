@@ -13,10 +13,12 @@ import { secureRoutes } from "@/constants/SecureRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { utilSetStripLocale } from "@/controllers/slices/utilSlice";
 import { RootState } from "@/types/stateTypes";
+import { useTranslations } from "next-intl";
 
 export default function Mainmenu() {
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations();
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(utilSetStripLocale(pathname));
@@ -35,7 +37,7 @@ export default function Mainmenu() {
               onClick={() => router.push(obj.url)}
             >
               <ListItemIcon>{obj.icon}</ListItemIcon>
-              <ListItemText primary={obj.text} />
+              <ListItemText primary={t(obj.text)} />
             </ListItemButton>
           </ListItem>
         );

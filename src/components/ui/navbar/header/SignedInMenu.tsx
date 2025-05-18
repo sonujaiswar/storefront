@@ -3,14 +3,8 @@ import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Divider from "@mui/material/Divider";
-import LocationPinIcon from "@mui/icons-material/LocationPin";
-import LogoutIcon from "@mui/icons-material/Logout";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -103,7 +97,8 @@ export default function SignedInMenu() {
           handleClose={handleClose}
           href={NavigationRoutes.dashboardPage.url}
         >
-          <DashboardIcon />
+          {NavigationRoutes.dashboardPage.icon}
+
           {t("account")}
         </SignedInMenuAction>
 
@@ -111,14 +106,14 @@ export default function SignedInMenu() {
           href={NavigationRoutes.profilePage.url}
           handleClose={handleClose}
         >
-          <AccountCircleIcon />
+          {NavigationRoutes.profilePage.icon}
           {t("profile")}
         </SignedInMenuAction>
         <SignedInMenuAction
           href={NavigationRoutes.addressPage.url}
           handleClose={handleClose}
         >
-          <LocationPinIcon />
+          {NavigationRoutes.addressPage.icon}
           {t("address")}
         </SignedInMenuAction>
 
@@ -126,7 +121,7 @@ export default function SignedInMenu() {
           href={NavigationRoutes.favoritePage.url}
           handleClose={handleClose}
         >
-          <FavoriteIcon />
+          {NavigationRoutes.favoritePage.icon}
           {t("favorites")}
         </SignedInMenuAction>
 
@@ -139,7 +134,7 @@ export default function SignedInMenu() {
           href={NavigationRoutes.signoutPage.url}
           handleClose={handleClose}
         >
-          <LogoutIcon />
+          {NavigationRoutes.signoutPage.icon}
           {t("logout")}
         </SignedInMenuAction>
       </StyledMenu>
