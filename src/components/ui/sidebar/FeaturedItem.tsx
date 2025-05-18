@@ -6,13 +6,15 @@ import ListSubheader from "@mui/material/ListSubheader";
 
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
 import FeaturedItemListSkeleton from "@/components/skeletons/FeaturedItemListSkeleton";
+import { useTranslations } from "next-intl";
 const FeaturedItemList = React.lazy(() => import("./FeaturedItemList"));
 export default function FeaturedItem() {
+  const t = useTranslations("UnprotectedSidebar");
   return (
     <>
       <List component="nav" aria-label="menu list">
         <ListSubheader component="div" id="nested-list-subheader">
-          Featured Items
+          {t("navigationHeader")}
         </ListSubheader>
         <React.Suspense fallback={<FeaturedItemListSkeleton />}>
           <FeaturedItemList

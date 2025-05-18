@@ -4,6 +4,13 @@
     "description": "Discover a world of timeless elegance and timeless fashion",
     "about": "Go to the about page"
   },
+  "UnprotectedSidebar": {
+    "navigationHeader": "Featured Items",
+    "navigationFilter": "Filters",
+    "navigationPriceRange": "Price range",
+    "navigationSelectColor": "Select Colours",
+    "navigationHelp": "We're Here to Help"
+  },
   "HeaderButton": {
     "login": "Sign in",
     "cart": "Cart"
@@ -27,7 +34,9 @@
     "offers": "Offers",
     "signin": "Sign in",
     "cart": "Cart",
-    "helpdesk": "Helpdesk"
+    "helpdesk": "Help Desk",
+    "about": "About us",
+    "contact": "Contact us"
   },
   "secureNavigationRoutes": {
     "dashboard": "Dashboard",

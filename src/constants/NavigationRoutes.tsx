@@ -12,6 +12,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import CategoryIcon from "@mui/icons-material/Category";
 import LogoutIcon from "@mui/icons-material/Logout";
 import React from "react";
+import StoreIcon from "@mui/icons-material/Store";
 interface NavigationRoutesState {
   [key: string]: { url: string; icon: React.ReactNode; text: string };
 }
@@ -77,7 +78,12 @@ const NavigationRoutes: NavigationRoutesState = {
     icon: <HelpIcon />,
     text: "navigationRoutes.helpdesk",
   },
-  contactPage: { url: "/contact", icon: "", text: "Contact" },
+  contactPage: { url: "/contact", icon: "", text: "navigationRoutes.contact" },
+  aboutPage: {
+    url: "/about",
+    icon: <StoreIcon />,
+    text: "navigationRoutes.about",
+  },
 };
 
 export { NavigationRoutes };

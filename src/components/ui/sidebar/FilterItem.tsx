@@ -8,6 +8,7 @@ import { ListItem, Slider } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslations } from "next-intl";
 // import {
 //   setFilteredProductsByPriceRange,
 //   setFilteredProductsByColor,
@@ -23,6 +24,7 @@ const minPrice = productMinMax.min;
 const maxPrice = productMinMax.max;
 export default function FilterItem() {
   const dispatch = useDispatch();
+  const t = useTranslations("UnprotectedSidebar");
   // const minPrice = useSelector(
   //   (state: RootState) => state.productstate.minPrice
   // );
@@ -63,12 +65,12 @@ export default function FilterItem() {
     <>
       <List component="nav" aria-label="menu list">
         <ListSubheader component="div" id="nested-list-subheader">
-          Filters
+          {t("navigationFilter")}
         </ListSubheader>
 
         {/* Price Range Filter */}
         <ListItem>
-          <ListItemText primary="Price Range" />
+          <ListItemText primary={t("navigationPriceRange")} />
         </ListItem>
 
         <ListItem>
@@ -88,7 +90,7 @@ export default function FilterItem() {
 
         {/* Color Filter */}
         <ListItem>
-          <ListItemText primary="Select Colour" />
+          <ListItemText primary={t("navigationSelectColor")} />
         </ListItem>
 
         <ListItem>
