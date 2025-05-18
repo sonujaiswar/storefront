@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
 } from "@mui/material";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -27,6 +28,13 @@ export default function Mainmenu() {
   const stripedPathname = useSelector((state: RootState) => state.utils.path);
   return (
     <List>
+      <ListSubheader
+        component={"div"}
+        id="nested-list-subheader"
+        sx={{ fontWeight: 600, fontFamily: "Roboto" }}
+      >
+        {t("ProtectedSidebarText.navigationSubHeader")}, USER
+      </ListSubheader>
       {secureRoutes.map((obj, index) => {
         const isSelected = stripedPathname === obj.url;
 

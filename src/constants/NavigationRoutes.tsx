@@ -14,7 +14,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import React from "react";
 import StoreIcon from "@mui/icons-material/Store";
 interface NavigationRoutesState {
-  [key: string]: { url: string; icon: React.ReactNode; text: string };
+  [key: string]: { url: string; icon?: React.ReactNode; text: string };
 }
 
 const NavigationRoutes: NavigationRoutesState = {

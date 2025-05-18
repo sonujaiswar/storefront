@@ -11,6 +11,9 @@
     "navigationSelectColor": "Select Colours",
     "navigationHelp": "We're Here to Help"
   },
+  "ProtectedSidebarText": {
+    "navigationSubHeader": "Hello"
+  },
   "HeaderButton": {
     "login": "Sign in",
     "cart": "Cart"

@@ -14,5 +14,3 @@ const routeKeys: NavigationRouteKey[] = [
 
 const secureRoutes = routeKeys.map((key) => NavigationRoutes[key]);
 export { secureRoutes };
-
-console.log(secureRoutes);
