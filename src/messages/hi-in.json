@@ -3,5 +3,80 @@
     "title": "Attirebella - पारंपरिक और आधुनिक परिधानों की सुंदर प्रस्तुति",
     "description": "शाश्वत सुंदरता और फैशन की दुनिया की खोज करें",
     "about": "परिचय पृष्ठ पर जाएं"
+  },
+  "UnprotectedSidebar": {
+    "navigationHeader": "विशेष आइटम्स",
+    "navigationFilter": "फ़िल्टर",
+    "navigationPriceRange": "मूल्य सीमा",
+    "navigationSelectColor": "रंग चुनें",
+    "navigationHelp": "हम आपकी मदद के लिए यहाँ हैं"
+  },
+  "HeaderButton": {
+    "login": "साइन इन",
+    "cart": "कार्ट"
+  },
+  "SignedDropDownOptions": {
+    "profile": "प्रोफ़ाइल",
+    "logout": "लॉग आउट",
+    "account": "खाता",
+    "favorites": "पसंदीदा",
+    "address": "पता",
+    "more": "अधिक"
+  },
+  "logoutPage": {
+    "title": "आप लॉग आउट हो गए हैं",
+    "description": "आपकी यात्रा के लिए धन्यवाद! हम आपको फिर से देखने की आशा करते हैं।",
+    "buttonText": "अब खरीदारी करें"
+  },
+  "navigationRoutes": {
+    "trending": "प्रचलित",
+    "products": "सभी उत्पाद देखें",
+    "offers": "ऑफर्स",
+    "signin": "साइन इन",
+    "cart": "कार्ट",
+    "helpdesk": "सहायता केंद्र",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें"
+  },
+  "secureNavigationRoutes": {
+    "dashboard": "डैशबोर्ड",
+    "profile": "प्रोफ़ाइल",
+    "order": "ऑर्डर",
+    "favorite": "पसंदीदा",
+    "address": "पता",
+    "secure": "सुरक्षित"
+  },
+  "cartPage": {
+    "title": "खरीदारी कार्ट",
+    "empty": "आपका कार्ट खाली है",
+    "emptymessage": "कृपया खरीदारी जारी रखें।",
+    "continuebutton": "अब खरीदारी करें",
+    "itemsincart": "कार्ट में वस्तुएं",
+    "cartordersummary": "ऑर्डर सारांश",
+    "ordersummaryoriginalprice": "मूल कीमत",
+    "ordersummarygstperslab": "GST (प्रति वस्तु स्लैब)",
+    "ordersummaryshipping": "शिपिंग",
+    "ordersummarysubtotal": "उप-योग",
+    "ordersummaryaction": "ऑर्डर करें"
+  },
+  "signinPage": {
+    "title": "वापसी पर स्वागत है!",
+    "description": "साइन इन करें और अपने लिए एक खास खरीदारी अनुभव अनलॉक करें।",
+    "useSocial": "सोशल साइन-इन पसंद है?",
+    "useEmail": "ईमेल और पासवर्ड का उपयोग करना पसंद है?",
+    "useEmailButton": "ईमेल और पासवर्ड का उपयोग करें",
+    "textfieldEmail": "ईमेल",
+    "textfieldPassword": "पासवर्ड",
+    "emailButtonText": "ईमेल से साइन इन करें",
+    "socialGoogleButtonText": "Google से जारी रखें",
+    "socialFacebookButtonText": "Facebook से जारी रखें",
+    "signUpAction": "क्या आपके पास खाता नहीं है? यहाँ क्लिक करें..."
+  },
+  "signupPage": {
+    "title": "साइन अप करें",
+    "loading": "खाता बनाया जा रहा है...",
+    "description": "कृपया अपनी जानकारी दर्ज करें ताकि हम आपके लिए खाता बना सकें जिससे चेकआउट और ऑर्डर ट्रैकिंग तेज़ हो जाए।",
+    "buttonText": "खाता बनाएं",
+    "buttonTextSignIn": "पहले से खाता है? साइन इन करें"
   }
 }
