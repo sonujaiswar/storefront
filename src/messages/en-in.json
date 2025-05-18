@@ -52,6 +52,14 @@
     "textfieldPassword": "Password",
     "emailButtonText": "Sign in with Email",
     "socialGoogleButtonText": "Sign in with Google",
-    "socialFacebookButtonText": "Sign in with Facebook"
+    "socialFacebookButtonText": "Sign in with Facebook",
+    "signUpAction": "Don't have an account? click here..."
+  },
+  "signupPage": {
+    "title": "Sign Up",
+    "loading": "Creating account...",
+    "description": "Please enter your details to create an account with us for faster checkout and order tracking.",
+    "buttonText": "Create account",
+    "buttonTextSignIn": "Already have an account? Sign In"
   }
 }

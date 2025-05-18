@@ -76,7 +76,7 @@ export default function LoginWithEmail() {
           href={NavigationRoutes.signupPage.url}
           sx={{ mt: 2 }}
         >
-          {t("signup.action")}
+          {t("signUpAction")}
         </Button>
       </Stack>
     </>
