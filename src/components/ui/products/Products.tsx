@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 export default function Products() {
   const isOpen = useSelector((state: RootState) => state.settings.isDrawerOpen);
   const productLoading = useSelector(
-    (state: RootState) => state.settings.isProtectedMode
+    (state: RootState) => state.session.isProtectedMode
   );
 
   return (
