@@ -82,5 +82,9 @@
     "description": "Please enter your details to create an account with us for faster checkout and order tracking.",
     "buttonText": "Create account",
     "buttonTextSignIn": "Already have an account? Sign In"
+  },
+  "dashboardPage": {
+    "title": "Dashboard",
+    "description": "Keep track of your orders, get the latest updates on new arrivals, and explore personalized fashion picks just for you."
   }
 }

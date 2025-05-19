@@ -1,29 +1,15 @@
-/*************  ✨ Windsurf Command ⭐  *************/
+// app/your-path/DashboardPage.tsx
 "use client";
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Grid,
-  Box,
-  Paper,
-  Divider,
-  CardActionArea,
-} from "@mui/material";
+import { Typography, Grid, Divider } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
-import Link from "next/link";
+import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 
 const DashboardPage = () => {
   const t = useTranslations();
 
-  const items: {
-    title: string;
-    description: string;
-    icon: React.ReactNode;
-    url: string;
-  }[] = [
+  const items = [
     {
       title: t("secureNavigationRoutes.profile"),
       description: "Manage your profile details.",
@@ -63,51 +49,24 @@ const DashboardPage = () => {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Paper sx={{ p: 4 }}>
-        <Grid container spacing={3}>
-          <Grid size={12}>
-            <Typography variant="h4">Dashboard</Typography>
-            <Divider sx={{ my: 2 }} />
-            <Typography variant="body2" color="text.secondary">
-              Keep track of your activity, monitor key updates, and explore
-              personalized recommendations tailored just for you.
-            </Typography>
-          </Grid>
-          {items.map((item, index) => (
-            <Grid
-              size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
-              key={index}
-              sx={{ mt: 2 }}
-            >
-              <Card>
-                <CardActionArea
-                  LinkComponent={Link}
-                  href={item.url}
-                  sx={{
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                    "&:hover": {
-                      boxShadow: 6, // MUI shadow level
-                      color: "primary.main",
-                    },
-                  }}
-                >
-                  <CardContent>
-                    {item.icon}
-                    <Typography variant="h6" component="div">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          ))}
+    <Grid container spacing={3}>
+      <Grid size={12}>
+        <Typography variant="h4">{t("dashboardPage.title")}</Typography>
+        <Divider sx={{ my: 2 }} />
+        <Typography variant="body2" color="text.secondary">
+          {t("dashboardPage.description")}
+        </Typography>
+      </Grid>
+      {items.map((item, index) => (
+        <Grid
+          size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
+          key={index}
+          sx={{ mt: 2 }}
+        >
+          <DashboardCard {...item} />
         </Grid>
-      </Paper>
-    </Box>
+      ))}
+    </Grid>
   );
 };
 

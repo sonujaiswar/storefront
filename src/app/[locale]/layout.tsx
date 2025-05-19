@@ -1,6 +1,7 @@
 import "@fontsource/nunito";
 import "@fontsource/playfair-display";
 import "@fontsource/roboto";
+
 import "@/styles/globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";

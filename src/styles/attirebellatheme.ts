@@ -41,6 +41,9 @@ const theme = createTheme({
     h6: {
       fontWeight: 600,
     },
+    subtitle1: {
+      fontWeight: 600,
+    },
   },
 
   components: {
