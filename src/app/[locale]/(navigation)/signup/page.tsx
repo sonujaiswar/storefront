@@ -13,26 +13,26 @@ export default function signUpPage() {
         <Typography>{t("description")}</Typography>
         <Box component={"form"}>
           <TextField
-            label="First name"
+            label={t("formFirstName")}
             name="Firstname"
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Last name"
+            label={t("formLastName")}
             name="Lastname"
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Email"
+            label={t("formEmail")}
             name="email"
             type="email"
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Password"
+            label={t("formPassword")}
             name="password"
             type="password"
             fullWidth

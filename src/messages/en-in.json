@@ -81,7 +81,12 @@
     "loading": "Creating account...",
     "description": "Please enter your details to create an account with us for faster checkout and order tracking.",
     "buttonText": "Create account",
-    "buttonTextSignIn": "Already have an account? Sign In"
+    "buttonTextSignIn": "Already have an account? Sign In",
+    "formFirstName": "First name",
+    "formLastName": "Last name",
+    "formEmail": "Email",
+    "formPassword": "Password",
+    "formConfirmPassword": "Confirm Password"
   },
   "dashboardPage": {
     "title": "Dashboard",
