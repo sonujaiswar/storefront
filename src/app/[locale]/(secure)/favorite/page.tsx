@@ -16,6 +16,8 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import InfoIcon from "@mui/icons-material/Info";
 import Products from "@/components/ui/products/Products";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/stateTypes";
 interface FavoriteItemState {
   id: number;
   title: string;
@@ -42,14 +44,14 @@ const mockFavorites = [
 
 const FavoritesPage = () => {
   const [favorites, setFavorites] = React.useState<FavoriteItemState[]>([]);
-
+  const checkcart = useSelector((state: RootState) => state.cart.CartItemsList);
   const removeFromFavorites = (id: number) => {
     setFavorites((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
     <>
-      {favorites.length === 0 ? (
+      {checkcart.length === 0 ? (
         <Box
           sx={{
             display: "flex",
