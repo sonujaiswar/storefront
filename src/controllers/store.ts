@@ -3,6 +3,7 @@ import settingsReducer from "./slices/settingsSlice"; // example slice
 import cartReducer from "./slices/cartSlice"; // example slice
 import sessionReducer from "./slices/sessionSlice"; // example slice
 import utilsReducer from "./slices/utilSlice"; // example slice
+import dialogReducer from "./slices/dialogSlice"; // example slice
 
 // store.ts
 import { persistStore, persistReducer } from "redux-persist";
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   session: sessionReducer,
   utils: utilsReducer,
+  dialog: dialogReducer,
   // Add more slices here
 });
 

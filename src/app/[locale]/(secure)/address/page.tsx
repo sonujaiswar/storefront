@@ -16,6 +16,7 @@ import {
   Box,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
+import Addaddress from "@/components/ui/address/Addaddress";
 
 interface Address {
   id: number;
@@ -137,7 +138,7 @@ export default function CustomerAddressUI() {
           Add New Address
         </Button>
       </Box>
-
+      <Addaddress />
       <Dialog
         open={dialogOpen}
         onClose={handleCloseDialog}
