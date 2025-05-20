@@ -1,4 +1,4 @@
-interface AddressTypesUI {
+export interface AddressTypesUI {
   full_name: string;
   phone: string;
   addressLine1: string;
@@ -10,6 +10,6 @@ interface AddressTypesUI {
   country: string;
 }
 
-interface AddressTypes extends AddressTypesUI {
+export interface AddressTypes extends AddressTypesUI {
   address_id: string;
 }
