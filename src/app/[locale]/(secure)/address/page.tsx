@@ -16,7 +16,7 @@ import {
   Box,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
-import Addaddress from "@/components/ui/address/Addaddress";
+import Addaddress from "@/components/ui/address/Action";
 
 interface Address {
   id: number;
