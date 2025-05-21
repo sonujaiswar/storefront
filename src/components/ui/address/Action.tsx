@@ -15,6 +15,7 @@ import {
   DialogActions,
   DialogContent,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
@@ -37,6 +38,8 @@ export default function Addaddress() {
     dispatch(dialogToggle());
   };
 
+  const t = useTranslations("addressPage");
+
   return (
     <>
       <DialogModel dialogTitle={isEditing ? "Edit Address" : "Add Address"}>
@@ -44,7 +47,7 @@ export default function Addaddress() {
           <DialogContent>
             <TextField
               fullWidth
-              label="Full Name"
+              label={t("addressFormFullName")}
               value={addressForm.full_name}
               onChange={(e) => handleChange("full_name", e.target.value)}
               margin="normal"
@@ -52,7 +55,7 @@ export default function Addaddress() {
             />
             <TextField
               fullWidth
-              label="Phone Number"
+              label={t("addressFormPhone")}
               value={addressForm.phone}
               onChange={(e) => handleChange("phone", e.target.value)}
               margin="normal"
@@ -60,7 +63,7 @@ export default function Addaddress() {
             />
             <TextField
               fullWidth
-              label="Address Line 1"
+              label={t("addressFormLine1")}
               value={addressForm.addressLine1}
               onChange={(e) => handleChange("addressLine1", e.target.value)}
               margin="normal"
@@ -68,7 +71,7 @@ export default function Addaddress() {
             />
             <TextField
               fullWidth
-              label="Address Line 2"
+              label={t("addressFormLine2")}
               value={addressForm.addressLine2}
               onChange={(e) => handleChange("addressLine2", e.target.value)}
               margin="normal"
@@ -77,7 +80,7 @@ export default function Addaddress() {
               <Grid size={6}>
                 <TextField
                   fullWidth
-                  label="City"
+                  label={t("addressFormCity")}
                   value={addressForm.city}
                   onChange={(e) => handleChange("city", e.target.value)}
                   margin="normal"
@@ -87,7 +90,7 @@ export default function Addaddress() {
               <Grid size={6}>
                 <TextField
                   fullWidth
-                  label="State"
+                  label={t("addressFormState")}
                   value={addressForm.state}
                   onChange={(e) => handleChange("state", e.target.value)}
                   margin="normal"
@@ -97,7 +100,7 @@ export default function Addaddress() {
               <Grid size={6}>
                 <TextField
                   fullWidth
-                  label="Postal Code"
+                  label={t("addressFormPincode")}
                   value={addressForm.postalCode}
                   onChange={(e) => handleChange("postalCode", e.target.value)}
                   margin="normal"
@@ -107,7 +110,7 @@ export default function Addaddress() {
               <Grid size={6}>
                 <TextField
                   fullWidth
-                  label="Country"
+                  label={t("addressFormCountry")}
                   value={addressForm.country}
                   onChange={(e) => handleChange("country", e.target.value)}
                   margin="normal"
@@ -125,15 +128,11 @@ export default function Addaddress() {
           </DialogContent>
           <DialogActions>
             <Button variant="contained" onClick={handleSave}>
-              Save
+              {isEditing ? t("addressFormUpdate") : t("addressFormSave")}
             </Button>
           </DialogActions>
         </Box>
       </DialogModel>
-
-      <Button variant="outlined" onClick={() => dispatch(dialogToggle())}>
-        Add Address
-      </Button>
     </>
   );
 }

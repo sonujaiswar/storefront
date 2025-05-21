@@ -6,103 +6,64 @@ import {
   CardContent,
   Typography,
   Grid,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  IconButton,
-  Box,
+  Divider,
+  CardActionArea,
 } from "@mui/material";
-import { Edit, Delete } from "@mui/icons-material";
+import { AddLocation } from "@mui/icons-material";
 import Addaddress from "@/components/ui/address/Action";
 import Address from "@/components/ui/address/Address";
-
-interface Address {
-  id: number;
-  name: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  country: string;
-}
-
-const initialAddresses: Address[] = [
-  {
-    id: 1,
-    name: "Vivek Jaiswar",
-    phone: "9876543210",
-    addressLine1: "123 Station Road",
-    addressLine2: "Near LTT",
-    city: "Mumbai",
-    state: "Maharashtra",
-    postalCode: "400088",
-    country: "India",
-  },
-];
+import { useTranslations } from "next-intl";
+import { useDispatch } from "react-redux";
+import { dialogToggle } from "@/controllers/slices/dialogSlice";
+import {
+  addressResetForm,
+  addressSetEditing,
+} from "@/controllers/slices/addressSlice";
 
 export default function CustomerAddressUI() {
-  const [addresses, setAddresses] = useState(initialAddresses);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
-
-  const handleOpenDialog = (address?: Address) => {
-    setEditingAddress(address || null);
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setEditingAddress(null);
-    setDialogOpen(false);
-  };
-
-  const handleSaveAddress = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newAddress: Address = {
-      id: editingAddress?.id || Date.now(),
-      name: formData.get("name") as string,
-      phone: formData.get("phone") as string,
-      addressLine1: formData.get("addressLine1") as string,
-      addressLine2: formData.get("addressLine2") as string,
-      city: formData.get("city") as string,
-      state: formData.get("state") as string,
-      postalCode: formData.get("postalCode") as string,
-      country: formData.get("country") as string,
-    };
-
-    if (editingAddress) {
-      setAddresses(
-        addresses.map((addr) =>
-          addr.id === editingAddress.id ? newAddress : addr
-        )
-      );
-    } else {
-      setAddresses([...addresses, newAddress]);
-    }
-
-    handleCloseDialog();
-  };
-
-  const handleDeleteAddress = (id: number) => {
-    setAddresses(addresses.filter((addr) => addr.id !== id));
-  };
-
+  const t = useTranslations("addressPage");
+  const dispatch = useDispatch();
   return (
-    <Box p={3}>
-      <Typography variant="h5" gutterBottom>
-        Saved Addresses
-      </Typography>
-
-      <Grid container spacing={2}>
-        <Address /> {/* Render the Address component */}
+    <Grid container spacing={2}>
+      <Grid size={12}>
+        <Typography variant="h4" gutterBottom>
+          {t("title")}
+        </Typography>
+        <Divider sx={{ my: 2 }} />
+        <Typography>{t("description")}</Typography>
       </Grid>
-
+      <Grid size={12}>
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+            <Card variant="outlined">
+              <CardActionArea
+                onClick={() => {
+                  dispatch(dialogToggle());
+                  dispatch(addressSetEditing(false));
+                  dispatch(addressResetForm());
+                }}
+              >
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minHeight: 240,
+                  }}
+                >
+                  <AddLocation sx={{ fontSize: 92, color: "primary.main" }} />
+                  <Typography variant="h6">
+                    {t("addAddressCardAction")}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+          <Address /> {/* Render the Address component */}
+        </Grid>
+      </Grid>
       <Addaddress />
-    </Box>
+    </Grid>
   );
 }

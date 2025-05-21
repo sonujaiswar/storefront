@@ -91,5 +91,21 @@
   "dashboardPage": {
     "title": "Dashboard",
     "description": "Keep track of your orders, get the latest updates on new arrivals, and explore personalized fashion picks just for you."
+  },
+  "addressPage": {
+    "title": "Your saved addresses",
+    "description": "Add new addresses, edit existing ones, or set a default address to speed up your checkout. Keeping your details updated ensures faster and smoother deliveries.",
+    "addAddressCardAction": "Add New Address",
+    "addressFormFullName": "Full Name",
+    "addressFormPhone": "Phone Number",
+    "addressFormLine1": "Address Line 1",
+    "addressFormLine2": "Address Line 2",
+    "addressFormCity": "City",
+    "addressFormState": "State",
+    "addressFormPincode": "Pin code",
+    "addressFormCountry": "Country",
+    "addressFormSave": "Save",
+    "addressFormUpdate": "Update",
+    "addressFormCancel": "Cancel"
   }
 }

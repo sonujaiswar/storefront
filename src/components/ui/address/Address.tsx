@@ -36,7 +36,7 @@ export default function Address() {
       {address.map((addr: AddressTypes) => (
         <Grid size={{ xs: 12, sm: 6, md: 4 }} key={addr.address_id}>
           <Card variant="outlined" sx={{ mb: 2 }}>
-            <CardContent>
+            <CardContent sx={{ minHeight: 240 }}>
               <Typography variant="subtitle1" fontWeight="bold">
                 {addr.full_name}
               </Typography>
@@ -56,7 +56,7 @@ export default function Address() {
                   <Edit />
                 </IconButton>
                 <IconButton
-                  color="error"
+                  color="primary"
                   onClick={() => handleDeleteAddress(addr.address_id)}
                 >
                   <Delete />
