@@ -42,7 +42,9 @@ export default function Addaddress() {
 
   return (
     <>
-      <DialogModel dialogTitle={isEditing ? "Edit Address" : "Add Address"}>
+      <DialogModel
+        dialogTitle={isEditing ? t("addressEditForm") : t("addressAddForm")}
+      >
         <Box component="form">
           <DialogContent>
             <TextField
@@ -120,7 +122,7 @@ export default function Addaddress() {
             </Grid>
             <TextField
               fullWidth
-              label="Landmark"
+              label={t("addressFormLandmark")}
               value={addressForm.landmark}
               onChange={(e) => handleChange("landmark", e.target.value)}
               margin="normal"

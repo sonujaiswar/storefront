@@ -96,6 +96,8 @@
     "title": "Your saved addresses",
     "description": "Add new addresses, edit existing ones, or set a default address to speed up your checkout. Keeping your details updated ensures faster and smoother deliveries.",
     "addAddressCardAction": "Add New Address",
+    "addressAddForm": "Add address",
+    "addressEditForm": "Edit address",
     "addressFormFullName": "Full Name",
     "addressFormPhone": "Phone Number",
     "addressFormLine1": "Address Line 1",
@@ -104,6 +106,7 @@
     "addressFormState": "State",
     "addressFormPincode": "Pin code",
     "addressFormCountry": "Country",
+    "addressFormLandmark": "Landmark",
     "addressFormSave": "Save",
     "addressFormUpdate": "Update",
     "addressFormCancel": "Cancel"

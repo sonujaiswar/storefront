@@ -1,40 +1,43 @@
 {
   "HomePage": {
-    "title": "Attirebella - पारंपरिक और आधुनिक परिधानों की सुंदर प्रस्तुति",
-    "description": "शाश्वत सुंदरता और फैशन की दुनिया की खोज करें",
-    "about": "परिचय पृष्ठ पर जाएं"
+    "title": "Attirebella - पारंपरिक और आधुनिक परिधानों को सुंदरता से प्रदर्शित करता है",
+    "description": "कालातीत सुंदरता और फैशन की दुनिया की खोज करें",
+    "about": "अधिक जानकारी के लिए यहां जाएं"
   },
   "UnprotectedSidebar": {
-    "navigationHeader": "विशेष आइटम्स",
-    "navigationFilter": "फ़िल्टर",
-    "navigationPriceRange": "मूल्य सीमा",
+    "navigationHeader": "चुनिंदा आइटम्स",
+    "navigationFilter": "फिल्टर",
+    "navigationPriceRange": "कीमत सीमा",
     "navigationSelectColor": "रंग चुनें",
     "navigationHelp": "हम आपकी मदद के लिए यहाँ हैं"
   },
+  "ProtectedSidebarText": {
+    "navigationSubHeader": "नमस्ते"
+  },
   "HeaderButton": {
-    "login": "साइन इन",
+    "login": "साइन इन करें",
     "cart": "कार्ट"
   },
   "SignedDropDownOptions": {
     "profile": "प्रोफ़ाइल",
-    "logout": "लॉग आउट",
+    "logout": "लॉगआउट",
     "account": "खाता",
     "favorites": "पसंदीदा",
     "address": "पता",
     "more": "अधिक"
   },
   "logoutPage": {
-    "title": "आप लॉग आउट हो गए हैं",
-    "description": "आपकी यात्रा के लिए धन्यवाद! हम आपको फिर से देखने की आशा करते हैं।",
-    "buttonText": "अब खरीदारी करें"
+    "title": "आप लॉग आउट हो चुके हैं",
+    "description": "पधारने के लिए धन्यवाद! आशा है फिर मिलेंगे।",
+    "buttonText": "अभी खरीदें"
   },
   "navigationRoutes": {
     "trending": "प्रचलित",
     "products": "सभी उत्पाद देखें",
     "offers": "ऑफर्स",
-    "signin": "साइन इन",
+    "signin": "साइन इन करें",
     "cart": "कार्ट",
-    "helpdesk": "सहायता केंद्र",
+    "helpdesk": "हेल्प डेस्क",
     "about": "हमारे बारे में",
     "contact": "संपर्क करें"
   },
@@ -47,36 +50,64 @@
     "secure": "सुरक्षित"
   },
   "cartPage": {
-    "title": "खरीदारी कार्ट",
-    "empty": "आपका कार्ट खाली है",
+    "title": "खरीदारी की टोकरी",
+    "empty": "आपकी टोकरी खाली है",
     "emptymessage": "कृपया खरीदारी जारी रखें।",
-    "continuebutton": "अब खरीदारी करें",
-    "itemsincart": "कार्ट में वस्तुएं",
+    "continuebutton": "अभी खरीदें",
+    "itemsincart": "कार्ट में आइटम्स",
     "cartordersummary": "ऑर्डर सारांश",
     "ordersummaryoriginalprice": "मूल कीमत",
-    "ordersummarygstperslab": "GST (प्रति वस्तु स्लैब)",
+    "ordersummarygstperslab": "जीएसटी (प्रति आइटम स्लैब)",
     "ordersummaryshipping": "शिपिंग",
     "ordersummarysubtotal": "उप-योग",
     "ordersummaryaction": "ऑर्डर करें"
   },
   "signinPage": {
-    "title": "वापसी पर स्वागत है!",
-    "description": "साइन इन करें और अपने लिए एक खास खरीदारी अनुभव अनलॉक करें।",
+    "title": "फिर से स्वागत है!",
+    "description": "साइन इन करें और एक खास शॉपिंग अनुभव का आनंद लें।",
     "useSocial": "सोशल साइन-इन पसंद है?",
-    "useEmail": "ईमेल और पासवर्ड का उपयोग करना पसंद है?",
+    "useEmail": "ईमेल और पासवर्ड से साइन-इन करना चाहते हैं?",
     "useEmailButton": "ईमेल और पासवर्ड का उपयोग करें",
     "textfieldEmail": "ईमेल",
     "textfieldPassword": "पासवर्ड",
     "emailButtonText": "ईमेल से साइन इन करें",
     "socialGoogleButtonText": "Google से जारी रखें",
     "socialFacebookButtonText": "Facebook से जारी रखें",
-    "signUpAction": "क्या आपके पास खाता नहीं है? यहाँ क्लिक करें..."
+    "signUpAction": "अभी तक खाता नहीं है? यहां क्लिक करें..."
   },
   "signupPage": {
     "title": "साइन अप करें",
-    "loading": "खाता बनाया जा रहा है...",
-    "description": "कृपया अपनी जानकारी दर्ज करें ताकि हम आपके लिए खाता बना सकें जिससे चेकआउट और ऑर्डर ट्रैकिंग तेज़ हो जाए।",
+    "loading": "खाता बना रहे हैं...",
+    "description": "कृपया तेज़ चेकआउट और ऑर्डर ट्रैकिंग के लिए अपना विवरण भरें।",
     "buttonText": "खाता बनाएं",
-    "buttonTextSignIn": "पहले से खाता है? साइन इन करें"
+    "buttonTextSignIn": "पहले से खाता है? साइन इन करें",
+    "formFirstName": "पहला नाम",
+    "formLastName": "अंतिम नाम",
+    "formEmail": "ईमेल",
+    "formPassword": "पासवर्ड",
+    "formConfirmPassword": "पासवर्ड की पुष्टि करें"
+  },
+  "dashboardPage": {
+    "title": "डैशबोर्ड",
+    "description": "अपने ऑर्डर्स पर नज़र रखें, नए उत्पादों की जानकारी पाएं और अपने लिए चुने गए फैशन विकल्प देखें।"
+  },
+  "addressPage": {
+    "title": "आपके सहेजे गए पते",
+    "description": "नए पते जोड़ें, मौजूदा को संपादित करें या डिफ़ॉल्ट पता सेट करें ताकि चेकआउट तेज़ और आसान हो सके। अद्यतित जानकारी से डिलीवरी बेहतर होती है।",
+    "addAddressCardAction": "नया पता जोड़ें",
+    "addressAddForm": "पता जोड़ें",
+    "addressEditForm": "पता संपादित करें",
+    "addressFormFullName": "पूरा नाम",
+    "addressFormPhone": "फोन नंबर",
+    "addressFormLine1": "पता पंक्ति 1",
+    "addressFormLine2": "पता पंक्ति 2",
+    "addressFormCity": "शहर",
+    "addressFormState": "राज्य",
+    "addressFormPincode": "पिन कोड",
+    "addressFormCountry": "देश",
+    "addressFormLandmark": "नज़दीकी स्थान",
+    "addressFormSave": "सहेजें",
+    "addressFormUpdate": "अपडेट करें",
+    "addressFormCancel": "रद्द करें"
   }
 }
