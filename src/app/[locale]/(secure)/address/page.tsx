@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import Addaddress from "@/components/ui/address/Action";
+import Address from "@/components/ui/address/Address";
 
 interface Address {
   id: number;
@@ -98,39 +99,7 @@ export default function CustomerAddressUI() {
       </Typography>
 
       <Grid container spacing={2}>
-        {addresses.map((address) => (
-          <Grid size={{ xs: 12, md: 6 }} key={address.id}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="bold">
-                  {address.name}
-                </Typography>
-                <Typography>{address.phone}</Typography>
-                <Typography>{address.addressLine1}</Typography>
-                <Typography>{address.addressLine2}</Typography>
-                <Typography>
-                  {address.city}, {address.state} - {address.postalCode}
-                </Typography>
-                <Typography>{address.country}</Typography>
-
-                <Box mt={2}>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleOpenDialog(address)}
-                  >
-                    <Edit />
-                  </IconButton>
-                  <IconButton
-                    color="error"
-                    onClick={() => handleDeleteAddress(address.id)}
-                  >
-                    <Delete />
-                  </IconButton>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+        <Address /> {/* Render the Address component */}
       </Grid>
 
       <Box mt={4}>
