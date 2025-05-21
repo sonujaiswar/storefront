@@ -66,7 +66,6 @@ export default function Address() {
           </Card>
         </Grid>
       ))}
-      <DialogModel dialogTitle="Add Address">This is sample</DialogModel>
     </>
   );
 }
