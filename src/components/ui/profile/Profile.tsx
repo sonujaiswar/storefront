@@ -3,20 +3,37 @@ import { Autocomplete, Divider, Paper, Typography } from "@mui/material";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField, MenuItem } from "@mui/material";
 import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
-
+import { RootState } from "@/types/stateTypes";
 import { setLocationSave } from "@/controllers/slices/locationSlice";
 import { countriesAndSubdivisionsTypes } from "@/types/utils/countriesAndSubdivisionsTypes";
+import EditLanguageAction from "./EditLanguageAction";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
-
+  const countryCode = useSelector(
+    (state: RootState) => state.location.area.countryCode
+  );
+  const provinceCode = useSelector(
+    (state: RootState) => state.location.area.provinceCode
+  );
   const [selectedCountryCode, setSelectedCountry] =
-    React.useState<countriesAndSubdivisionsTypes | null>(null);
+    React.useState<countriesAndSubdivisionsTypes | null>(
+      countriesAndSubdivisions.find((c) => c.countryCode === countryCode) ||
+        null
+    );
+  const [selectedProvince, setSelectedProvince] = React.useState<{
+    code: string;
+    name: string;
+  } | null>(
+    countriesAndSubdivisions
+      .find((c) => c.countryCode === countryCode)
+      ?.subdivisions.find((s) => s.code === provinceCode) || null
+  );
 
   const selectedCountry: countriesAndSubdivisionsTypes | undefined =
     countriesAndSubdivisions.find(
@@ -24,10 +41,6 @@ export default function Profile() {
     );
 
   const isProvinceAvailable = selectedCountry?.subdivisions?.length! > 0;
-
-  const [selectedProvince, setSelectedProvince] = React.useState<{
-    code: string;
-  } | null>(null);
 
   function handleSave(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -108,25 +121,22 @@ export default function Profile() {
         <ProfileRow
           label={t("basicFormEditCountry")}
           value={
-            countriesAndSubdivisions.find(
-              (c) => c.countryCode === selectedCountryCode?.countryCode
-            )?.countryName || ""
+            countriesAndSubdivisions.find((c) => c.countryCode === countryCode)
+              ?.countryName || ""
           }
           onEdit={() => dispatch(dialogSetKey("EditLocation"))}
-          editLabel="Edit country"
+          editLabel={t("basicFormEditCountryLink")}
         />
         <Divider sx={{ my: 1 }} />
-        {isProvinceAvailable && (
+        {(isProvinceAvailable || provinceCode) && (
           <>
             <ProfileRow
               label={t("basicFormEditStateProvince")}
               value={
                 countriesAndSubdivisions
-                  .find(
-                    (c) => c.countryCode === selectedCountryCode?.countryCode
-                  )
-                  ?.subdivisions.find((s) => s.code === selectedProvince?.code)
-                  ?.name || ""
+                  .find((c) => c.countryCode === countryCode)
+                  ?.subdivisions.find((s) => s.code === provinceCode)?.name ||
+                ""
               }
               onEdit={() => dispatch(dialogSetKey("EditLocation"))}
               editLabel={t("basicFormEditProvince")}
@@ -134,12 +144,7 @@ export default function Profile() {
             <Divider sx={{ my: 1 }} />
           </>
         )}
-        <ProfileRow
-          label="Language"
-          value="English"
-          onEdit={() => console.log("Edit language")}
-          editLabel="Edit language"
-        />
+        <EditLanguageAction />
       </Paper>
     </>
   );

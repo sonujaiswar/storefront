@@ -7,6 +7,7 @@ import dialogReducer from "./slices/dialogSlice"; // example slice
 import addressReducer from "./slices/addressSlice"; // example slice
 import securityReducer from "./slices/securitySilce"; // example slice
 import locationReducer from "./slices/locationSlice"; // example slice
+import languageReducer from "./slices/languageSlice"; // example slice
 
 // store.ts
 import { persistStore, persistReducer } from "redux-persist";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   address: addressReducer,
   security: securityReducer,
   location: locationReducer,
+  language: languageReducer,
   // Add more slices here
 });
 

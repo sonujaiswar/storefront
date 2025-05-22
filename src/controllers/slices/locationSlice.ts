@@ -9,8 +9,8 @@ export interface CountriesState {
 
 const initialState: CountriesState = {
   area: {
-    countryCode: "",
-    provinceCode: "",
+    countryCode: "IN",
+    provinceCode: "IN-DL",
   },
 };
 

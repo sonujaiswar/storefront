@@ -145,8 +145,17 @@
     "profileTitle": "Profile",
     "basicFormEditGenderButtonText": "Update Gender",
     "basicFormEditProvince": "Edit Location",
+    "basicFormEditCountryLink": "Edit Country",
+
     "basicFormEditStateProvince": "State or Province",
     "basicFormEditCountry": "Country",
-    "basicFormEditLocationButtonText": "Update Location"
+    "basicFormEditLocationButtonText": "Update Location",
+    "basicFormEditLanguage": "Language",
+    "basicFormEditLanguageTitle": "Edit Language",
+    "basicFormEditLanguageLink": "Edit Language",
+    "basicFormEditLanguageMenu1": "English",
+    "basicFormEditLanguageMenu2": "Hindi",
+    "basicFormEditLanguageMenu3": "Other",
+    "basicFormEditLanguageButtonText": "Update Language"
   }
 }
