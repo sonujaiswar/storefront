@@ -1,8 +1,13 @@
 "use client";
-
-import { useDispatch } from "react-redux";
+import { format } from "date-fns";
+import { parseISO } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileRow from "./ProfileRow";
-import { dialogSetKey, dialogToggle } from "@/controllers/slices/dialogSlice";
+import {
+  dialogReset,
+  dialogSetKey,
+  dialogToggle,
+} from "@/controllers/slices/dialogSlice";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
@@ -11,22 +16,32 @@ import * as React from "react";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { RootState } from "@/types/stateTypes";
+import { userSetDOB } from "@/controllers/slices/userSlice";
 
 export default function EditDOBAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
-  const [dob, setDob] = React.useState<Date | null>(null);
-
+  const dob = useSelector((state: RootState) => state.user.dob.dob);
+  const displayDOB = dob ? format(parseISO(dob), "dd-MM-yyyy") : "";
+  const [dateofbirth, setDob] = React.useState<Date | null>(
+    dob ? new Date(dob) : null
+  );
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(userSetDOB({ dob: dateofbirth?.toISOString() || null }));
+    dispatch(dialogReset());
+  };
   return (
     <>
       <DialogModel dialogTitle={t("basicFormEditDOBTitle")} dialogKey="EditDOB">
-        <Box component={"form"} onSubmit={(e) => e.preventDefault()}>
+        <Box component={"form"} onSubmit={handleSave}>
           <Grid container spacing={2}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <Grid size={12}>
                 <DatePicker
                   label={t("basicFormEditDOB")}
-                  value={dob}
+                  value={dateofbirth}
                   onChange={(newValue) => setDob(newValue)}
                   slotProps={{ textField: { fullWidth: true } }}
                 />
@@ -43,7 +58,7 @@ export default function EditDOBAction() {
 
       <ProfileRow
         label={t("basicFormEditDOB")}
-        value="06/06/1991"
+        value={displayDOB}
         tooltip="Your date of birth is needed for account security and to help us personalize your experience."
         onEdit={() => dispatch(dialogSetKey("EditDOB"))}
         editLabel={t("basicFormEditDOBLink")}

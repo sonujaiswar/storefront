@@ -5,10 +5,7 @@ import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import {
-  userFullName,
-  userFullNameReset,
-} from "@/controllers/slices/userSlice";
+import { userSetFullName } from "@/controllers/slices/userSlice";
 import { RootState } from "@/types/stateTypes";
 
 export default function EditNameAction() {
@@ -24,7 +21,7 @@ export default function EditNameAction() {
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userFullName({ first_name, last_name }));
+    dispatch(userSetFullName({ first_name, last_name }));
     setFirstName("");
     setlastName("");
     dispatch(dialogReset());

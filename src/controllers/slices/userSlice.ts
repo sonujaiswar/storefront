@@ -1,27 +1,31 @@
-import { UserTypes } from "@/types/user/userTypes";
+import { UserBasicTypes, UserDOBTypes } from "@/types/user/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const userState: UserTypes = {
+const userBasicTypes: UserBasicTypes = {
   first_name: "",
   last_name: "",
 };
+const userDOBTypes: UserDOBTypes = {
+  dob: null,
+};
 
 const initialState = {
-  user: userState,
+  user: userBasicTypes,
+  dob: userDOBTypes,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userFullName: (state, action: PayloadAction<UserTypes>) => {
+    userSetFullName: (state, action: PayloadAction<UserBasicTypes>) => {
       state.user = action.payload;
     },
-    userFullNameReset: (state) => {
-      state.user = userState;
+    userSetDOB: (state, action: PayloadAction<UserDOBTypes>) => {
+      state.dob = action.payload;
     },
   },
 });
 
-export const { userFullName, userFullNameReset } = userSlice.actions;
+export const { userSetFullName, userSetDOB } = userSlice.actions;
 export default userSlice.reducer;

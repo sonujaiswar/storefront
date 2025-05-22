@@ -4,7 +4,7 @@ import HelpIcon from "@mui/icons-material/Help";
 
 interface ProfileRowProps {
   label: string;
-  value: string;
+  value: any;
   onEdit?: () => void;
   editLabel?: string;
   tooltip?: string;
