@@ -5,7 +5,7 @@ import {
   addressSetForm,
 } from "@/controllers/slices/addressSlice";
 import { dialogToggle } from "@/controllers/slices/dialogSlice";
-import { AddressTypes } from "@/types/Address/AddressTypes";
+import { AddressTypes } from "@/types/address/addressTypes";
 import { RootState } from "@/types/stateTypes";
 import { Delete, Edit } from "@mui/icons-material";
 import {

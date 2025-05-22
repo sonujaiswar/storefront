@@ -8,6 +8,7 @@ import addressReducer from "./slices/addressSlice"; // example slice
 import securityReducer from "./slices/securitySilce"; // example slice
 import locationReducer from "./slices/locationSlice"; // example slice
 import languageReducer from "./slices/languageSlice"; // example slice
+import userReducer from "./slices/userSlice"; // example slice
 
 // store.ts
 import { persistStore, persistReducer } from "redux-persist";
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   security: securityReducer,
   location: locationReducer,
   language: languageReducer,
+  user: userReducer,
   // Add more slices here
 });
 

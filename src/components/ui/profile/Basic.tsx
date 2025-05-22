@@ -7,9 +7,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import ProfileRow from "./ProfileRow";
+
 import { useTranslations } from "next-intl";
-import { useDispatch, useSelector } from "react-redux";
 
 import EditNameAction from "./EditNameAction";
 import EditDOBAction from "./EditDOBAction";

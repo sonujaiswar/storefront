@@ -1,17 +1,39 @@
+import React, { use } from "react";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
-import { dialogSetKey, dialogToggle } from "@/controllers/slices/dialogSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField } from "@mui/material";
+import {
+  userFullName,
+  userFullNameReset,
+} from "@/controllers/slices/userSlice";
+import { RootState } from "@/types/stateTypes";
 
 export default function EditNameAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
+  const firstName = useSelector(
+    (state: RootState) => state.user.user.first_name
+  );
+  const lastName = useSelector((state: RootState) => state.user.user.last_name);
+
+  const [first_name, setFirstName] = React.useState<string>("");
+  const [last_name, setlastName] = React.useState<string>("");
+
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(userFullName({ first_name, last_name }));
+    setFirstName("");
+    setlastName("");
+    dispatch(dialogReset());
+  };
+
   return (
     <>
       <DialogModel dialogTitle={t("basicFormEditTitle")} dialogKey="EditName">
-        <Box component={"form"} onSubmit={(e) => e.preventDefault()}>
+        <Box component={"form"} onSubmit={handleSave}>
           <Grid container spacing={2}>
             <Grid size={6}>
               <TextField
@@ -19,6 +41,8 @@ export default function EditNameAction() {
                 label={t("basicFormFirstName")}
                 fullWidth
                 required
+                value={first_name}
+                onChange={(e) => setFirstName(e.target.value)}
                 margin="normal"
               />
             </Grid>
@@ -26,6 +50,8 @@ export default function EditNameAction() {
               <TextField
                 name="lastName"
                 label={t("basicFormLastName")}
+                value={last_name}
+                onChange={(e) => setlastName(e.target.value)}
                 fullWidth
                 margin="normal"
               />
@@ -41,7 +67,7 @@ export default function EditNameAction() {
 
       <ProfileRow
         label={t("basicFormFullName")}
-        value="Sonu J"
+        value={firstName + " " + lastName}
         onEdit={() => dispatch(dialogSetKey("EditName"))}
         editLabel={t("basicFormEditFullName")}
       />

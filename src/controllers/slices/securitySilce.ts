@@ -1,4 +1,4 @@
-import { AddressTypes, AddressTypesUI } from "@/types/Address/AddressTypes";
+import { AddressTypes, AddressTypesUI } from "@/types/address/addressTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface PasswordForm {
