@@ -110,5 +110,14 @@
     "addressFormSave": "Save",
     "addressFormUpdate": "Update",
     "addressFormCancel": "Cancel"
+  },
+  "securityPage": {
+    "title": "Security Settings",
+    "description": "Change your password here.",
+    "ChangePassword": "Change Password",
+    "passwordFormCurrent": "Current Password",
+    "passwordFormNewPassword": "New Password",
+    "passwordFormConfirmPassword": "Confirm Password",
+    "passwordFormButton": "Update Password"
   }
 }
