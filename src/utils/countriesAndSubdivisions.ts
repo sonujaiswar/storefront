@@ -1,4 +1,6 @@
-export const countriesAndSubdivisions = [
+import { countriesAndSubdivisionsTypes } from "@/types/utils/countriesAndSubdivisionsTypes";
+
+export const countriesAndSubdivisions: countriesAndSubdivisionsTypes[] = [
   {
     countryName: "Aruba",
     countryCode: "AW",

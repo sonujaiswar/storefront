@@ -1,31 +1,46 @@
-import { Divider, Paper, Typography } from "@mui/material";
+import React from "react";
+import { Autocomplete, Divider, Paper, Typography } from "@mui/material";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
-import { useDispatch, useSelector } from "react-redux";
-import { dialogSetKey } from "@/controllers/slices/dialogSlice";
+import { useDispatch } from "react-redux";
+import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField, MenuItem } from "@mui/material";
 import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
-import { RootState } from "@/types/stateTypes";
-import { setLocationFormField } from "@/controllers/slices/locationSlice";
+
+import { setLocationSave } from "@/controllers/slices/locationSlice";
+import { countriesAndSubdivisionsTypes } from "@/types/utils/countriesAndSubdivisionsTypes";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
 
-  const countryCode = useSelector(
-    (state: RootState) => state.location.countryCode
-  );
-  const subdivisions = useSelector(
-    (state: RootState) => state.location.subdivisions
-  );
+  const [selectedCountryCode, setSelectedCountry] =
+    React.useState<countriesAndSubdivisionsTypes | null>(null);
 
-  const handleChange = (
-    field: "countryCode" | "subdivisions",
-    value: string
-  ) => {
-    dispatch(setLocationFormField({ field, value }));
-  };
+  const selectedCountry: countriesAndSubdivisionsTypes | undefined =
+    countriesAndSubdivisions.find(
+      (c) => c.countryCode === selectedCountryCode?.countryCode
+    );
+
+  const isProvinceAvailable = selectedCountry?.subdivisions?.length! > 0;
+
+  const [selectedProvince, setSelectedProvince] = React.useState<{
+    code: string;
+  } | null>(null);
+
+  function handleSave(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    dispatch(
+      setLocationSave({
+        area: {
+          countryCode: selectedCountryCode?.countryCode,
+          provinceCode: selectedProvince?.code,
+        },
+      })
+    );
+    dispatch(dialogReset());
+  }
 
   return (
     <>
@@ -33,45 +48,51 @@ export default function Profile() {
         dialogTitle={t("basicFormEditProvince")}
         dialogKey="EditLocation"
       >
-        <Box component="form" onSubmit={(e) => e.preventDefault()}>
+        <Box component="form" onSubmit={handleSave}>
           <Grid container spacing={2}>
             <Grid size={12}>
-              <TextField
-                label={t("basicFormEditCountry")}
-                fullWidth
-                required
-                margin="normal"
-                select
-                value={countryCode}
-                onChange={(e) => handleChange("countryCode", e.target.value)}
-              >
-                {countriesAndSubdivisions.map((country) => (
-                  <MenuItem
-                    key={country.countryCode}
-                    value={country.countryCode}
-                  >
-                    {country.countryName}
-                  </MenuItem>
-                ))}
-              </TextField>
+              <Autocomplete
+                options={countriesAndSubdivisions}
+                getOptionLabel={(option) => option.countryName}
+                onChange={(_, newValue) => {
+                  setSelectedCountry(newValue);
+                  setSelectedProvince(null); // reset province
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label={t("basicFormEditCountry")}
+                    variant="outlined"
+                    required
+                    margin="normal"
+                    fullWidth
+                  />
+                )}
+              />
             </Grid>
 
             {/* Optional: Add subdivisions dropdown if needed */}
-            {/* <Grid size={12}>
-              <TextField
-                label={t("basicFormEditStateProvince")}
-                fullWidth
-                margin="normal"
-                select
-                value={subdivisions}
-                onChange={(e) => handleChange("subdivisions", e.target.value)}
-              >
-                {(countriesAndSubdivisions.find(c => c.countryCode === countryCode)?.subdivisions || []).map((sub) => (
-                  <MenuItem key={sub} value={sub}>{sub}</MenuItem>
-                ))}
-              </TextField>
-            </Grid> */}
-
+            {isProvinceAvailable && (
+              <Grid size={12}>
+                <Autocomplete
+                  options={selectedCountryCode?.subdivisions || []}
+                  getOptionLabel={(option) => option.name}
+                  onChange={(_, newValue) => {
+                    setSelectedProvince(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t("basicFormEditStateProvince")}
+                      variant="outlined"
+                      required
+                      margin="normal"
+                      fullWidth
+                    />
+                  )}
+                />
+              </Grid>
+            )}
             <Grid size={12} display="flex" justifyContent="end">
               <Button type="submit" variant="contained">
                 {t("basicFormEditLocationButtonText")}
@@ -86,18 +107,33 @@ export default function Profile() {
         <Divider sx={{ my: 2 }} />
         <ProfileRow
           label={t("basicFormEditCountry")}
-          value={countryCode}
+          value={
+            countriesAndSubdivisions.find(
+              (c) => c.countryCode === selectedCountryCode?.countryCode
+            )?.countryName || ""
+          }
           onEdit={() => dispatch(dialogSetKey("EditLocation"))}
           editLabel="Edit country"
         />
         <Divider sx={{ my: 1 }} />
-        <ProfileRow
-          label={t("basicFormEditStateProvince")}
-          value="Maharashtra"
-          onEdit={() => dispatch(dialogSetKey("EditLocation"))}
-          editLabel={t("basicFormEditProvince")}
-        />
-        <Divider sx={{ my: 1 }} />
+        {isProvinceAvailable && (
+          <>
+            <ProfileRow
+              label={t("basicFormEditStateProvince")}
+              value={
+                countriesAndSubdivisions
+                  .find(
+                    (c) => c.countryCode === selectedCountryCode?.countryCode
+                  )
+                  ?.subdivisions.find((s) => s.code === selectedProvince?.code)
+                  ?.name || ""
+              }
+              onEdit={() => dispatch(dialogSetKey("EditLocation"))}
+              editLabel={t("basicFormEditProvince")}
+            />
+            <Divider sx={{ my: 1 }} />
+          </>
+        )}
         <ProfileRow
           label="Language"
           value="English"

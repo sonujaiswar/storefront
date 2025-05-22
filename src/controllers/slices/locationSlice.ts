@@ -1,27 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+interface areaState {
+  countryCode: string | null | undefined;
+  provinceCode: string | null | undefined;
+}
 export interface CountriesState {
-  countryCode: string;
-  subdivisions: string;
+  area: areaState;
 }
 
 const initialState: CountriesState = {
-  countryCode: "IN",
-  subdivisions: "",
+  area: {
+    countryCode: "",
+    provinceCode: "",
+  },
 };
 
 const locationSlice = createSlice({
   name: "location",
   initialState,
   reducers: {
-    setLocationFormField: (
-      state,
-      action: PayloadAction<{ field: keyof CountriesState; value: string }>
-    ) => {
-      state[action.payload.field] = action.payload.value;
+    setLocationSave: (state, action: PayloadAction<CountriesState>) => {
+      state.area = action.payload.area;
     },
   },
 });
 
-export const { setLocationFormField } = locationSlice.actions;
+export const { setLocationSave } = locationSlice.actions;
 export default locationSlice.reducer;
