@@ -1,17 +1,16 @@
 import { UserBasicTypes, UserDOBTypes } from "@/types/user/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const userBasicTypes: UserBasicTypes = {
-  first_name: "",
-  last_name: "",
-};
-const userDOBTypes: UserDOBTypes = {
-  dob: null,
-};
+interface UserState {
+  user: UserBasicTypes;
+  gender: string | null;
+  dob: string | null;
+}
 
-const initialState = {
-  user: userBasicTypes,
-  dob: userDOBTypes,
+const initialState: UserState = {
+  user: { first_name: "", last_name: "" },
+  dob: null,
+  gender: "",
 };
 
 export const userSlice = createSlice({
@@ -21,7 +20,7 @@ export const userSlice = createSlice({
     userSetFullName: (state, action: PayloadAction<UserBasicTypes>) => {
       state.user = action.payload;
     },
-    userSetDOB: (state, action: PayloadAction<UserDOBTypes>) => {
+    userSetDOB: (state, action: PayloadAction<string>) => {
       state.dob = action.payload;
     },
   },

@@ -22,14 +22,14 @@ import { userSetDOB } from "@/controllers/slices/userSlice";
 export default function EditDOBAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
-  const dob = useSelector((state: RootState) => state.user.dob.dob);
+  const dob = useSelector((state: RootState) => state.user.dob);
   const displayDOB = dob ? format(parseISO(dob), "dd-MM-yyyy") : "";
   const [dateofbirth, setDob] = React.useState<Date | null>(
     dob ? new Date(dob) : null
   );
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userSetDOB({ dob: dateofbirth?.toISOString() || null }));
+    dispatch(userSetDOB(dateofbirth?.toISOString() || ""));
     dispatch(dialogReset());
   };
   return (
@@ -41,6 +41,7 @@ export default function EditDOBAction() {
               <Grid size={12}>
                 <DatePicker
                   label={t("basicFormEditDOB")}
+                  shouldDisableDate={(date) => date > new Date()}
                   value={dateofbirth}
                   onChange={(newValue) => setDob(newValue)}
                   slotProps={{ textField: { fullWidth: true } }}

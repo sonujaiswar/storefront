@@ -1,20 +1,26 @@
+import React from "react";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
-import { dialogSetKey, dialogToggle } from "@/controllers/slices/dialogSlice";
+import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 export default function EditGenderAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
+  const [selectGender, setSelectGender] = React.useState<string>("");
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(dialogReset());
+  };
   return (
     <>
       <DialogModel
         dialogTitle={t("basicFormEditGenderTitle")}
         dialogKey="EditGender"
       >
-        <Box component={"form"} onSubmit={(e) => e.preventDefault()}>
+        <Box component={"form"} onSubmit={handleSave}>
           <Grid container spacing={2}>
             <Grid size={12}>
               <TextField
@@ -22,6 +28,8 @@ export default function EditGenderAction() {
                 label={t("basicFormEditGender")}
                 fullWidth
                 required
+                value={selectGender}
+                onChange={(e) => setSelectGender(e.target.value)}
                 margin="normal"
                 select
               >
