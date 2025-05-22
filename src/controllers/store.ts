@@ -6,6 +6,7 @@ import utilsReducer from "./slices/utilSlice"; // example slice
 import dialogReducer from "./slices/dialogSlice"; // example slice
 import addressReducer from "./slices/addressSlice"; // example slice
 import securityReducer from "./slices/securitySilce"; // example slice
+import locationReducer from "./slices/locationSlice"; // example slice
 
 // store.ts
 import { persistStore, persistReducer } from "redux-persist";
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   dialog: dialogReducer,
   address: addressReducer,
   security: securityReducer,
+  location: locationReducer,
   // Add more slices here
 });
 

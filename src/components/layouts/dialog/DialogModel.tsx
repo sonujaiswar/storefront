@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
-import { dialogSetState } from "@/controllers/slices/dialogSlice";
+import { dialogReset, dialogSetState } from "@/controllers/slices/dialogSlice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -24,14 +24,23 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function DialogModel({
   dialogTitle,
   children,
-}: Readonly<{ dialogTitle: string; children: React.ReactNode }>) {
+  dialogKey,
+}: Readonly<{
+  dialogTitle: string;
+  children: React.ReactNode;
+  dialogKey?: string;
+}>) {
   const dispatch = useDispatch();
 
   const isOpen = useSelector((state: RootState) => state.dialog.isOpen);
 
+  const isDialogKey = useSelector((state: RootState) => state.dialog.key);
+
   const handleClose = () => {
-    dispatch(dialogSetState(false));
+    dispatch(dialogReset());
   };
+
+  const shouldOpen: any = dialogKey === isDialogKey ? isDialogKey : isOpen;
 
   return (
     <React.Fragment>
@@ -40,7 +49,7 @@ export default function DialogModel({
         fullWidth
         maxWidth="sm"
         aria-labelledby="genericDialog"
-        open={isOpen}
+        open={shouldOpen}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="genericDialog">
           {dialogTitle}
