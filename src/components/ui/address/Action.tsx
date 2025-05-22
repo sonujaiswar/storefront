@@ -30,7 +30,8 @@ export default function Addaddress() {
     dispatch(addressSetFormField({ field, value }));
   };
 
-  const handleSave = () => {
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const address_id = isEditing ? (addressForm as any).address_id : uuidv4();
     dispatch(addressSetSave({ address_id, ...addressForm }));
     dispatch(addressResetForm());
@@ -45,7 +46,7 @@ export default function Addaddress() {
       <DialogModel
         dialogTitle={isEditing ? t("addressEditForm") : t("addressAddForm")}
       >
-        <Box component="form">
+        <Box component="form" onSubmit={handleSave}>
           <DialogContent>
             <TextField
               fullWidth
@@ -59,8 +60,14 @@ export default function Addaddress() {
               fullWidth
               label={t("addressFormPhone")}
               value={addressForm.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (/^\d{0,10}$/.test(val)) {
+                  handleChange("phone", val);
+                }
+              }}
               margin="normal"
+              type="tel"
               required
             />
             <TextField
@@ -104,7 +111,12 @@ export default function Addaddress() {
                   fullWidth
                   label={t("addressFormPincode")}
                   value={addressForm.postalCode}
-                  onChange={(e) => handleChange("postalCode", e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (/^\d{0,6}$/.test(val)) {
+                      handleChange("postalCode", val);
+                    }
+                  }}
                   margin="normal"
                   required
                 />
@@ -129,7 +141,7 @@ export default function Addaddress() {
             />
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={handleSave}>
+            <Button variant="contained" color="primary" type="submit">
               {isEditing ? t("addressFormUpdate") : t("addressFormSave")}
             </Button>
           </DialogActions>

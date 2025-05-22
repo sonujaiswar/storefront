@@ -34,7 +34,7 @@ export const addressSlice = createSlice({
       const index = state.addresses.findIndex(
         (address) => address.address_id === action.payload.address_id
       );
-      console.log(`Set Save : `, action.payload);
+
       if (index !== -1) {
         // Update existing
         state.addresses[index] = action.payload;

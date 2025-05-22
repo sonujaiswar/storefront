@@ -1,23 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Switch,
-  FormControlLabel,
-  Divider,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper,
-  Grid,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Typography, Divider, Grid, Card, CardContent } from "@mui/material";
 import SecurityUI from "@/components/ui/security/Action";
 import { useTranslations } from "next-intl";
 

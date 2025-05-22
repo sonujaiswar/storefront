@@ -113,7 +113,7 @@
   },
   "securityPage": {
     "title": "Security Settings",
-    "description": "Change your password here.",
+    "description": "Keep your account safe by updating your password regularly.",
     "ChangePassword": "Change Password",
     "passwordFormCurrent": "Current Password",
     "passwordFormNewPassword": "New Password",
