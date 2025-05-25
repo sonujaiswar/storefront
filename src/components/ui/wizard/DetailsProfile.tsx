@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -10,18 +10,49 @@ import {
   StepLabel,
   Button,
 } from "@mui/material";
-import Basic from "../profile/Basic";
+
 import EditLocationAction from "../profile/EditLocationAction";
-import EditNameAction from "../profile/EditNameAction";
-import EditGenderAction from "../profile/EditGenderAction";
 import BasicAction from "../profile/BasicAction";
 import EditLanguageAction from "../profile/EditLanguageAction";
 import AccountAction from "../profile/AccountAction";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/stateTypes";
 
 const steps = ["Basic", "Location", "Contact"];
 
 export default function StepperExample() {
   const [step, setStep] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  // Redux state
+  const firstName = useSelector(
+    (state: RootState) => state.user.user.first_name
+  );
+  const dateofbirth = useSelector((state: RootState) => state.user.dob);
+  const gender = useSelector((state: RootState) => state.user.gender);
+  const countryCode = useSelector(
+    (state: RootState) => state.location.area.countryCode
+  );
+  const phoneNumber = useSelector((state: RootState) => state.user.phone);
+
+  // Update isDisabled based on current step's data validity
+  useEffect(() => {
+    if (step === 0) {
+      const valid =
+        firstName.trim().length > 0 &&
+        dateofbirth !== null &&
+        gender!.trim().length > 0;
+      setIsDisabled(!valid);
+    } else if (step === 1) {
+      const valid = countryCode!.trim().length > 0;
+      setIsDisabled(!valid);
+    } else if (step === 2) {
+      const valid = phoneNumber!.trim().length > 0;
+      setIsDisabled(!valid);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [step, firstName, dateofbirth, gender, countryCode, phoneNumber]);
 
   const renderStepContent = (stepIndex: number) => {
     switch (stepIndex) {
@@ -37,7 +68,12 @@ export default function StepperExample() {
   };
 
   const handleNext = () => {
-    if (step < steps.length - 1) setStep(step + 1);
+    if (step < steps.length - 1) {
+      setStep(step + 1);
+    } else {
+      // Final action on Finish
+      alert("All steps completed!");
+    }
   };
 
   const handleBack = () => {
@@ -45,7 +81,7 @@ export default function StepperExample() {
   };
 
   return (
-    <Grid container spacing={2} sx={{ minWidth: "30vw" }}>
+    <Grid container spacing={2} sx={{ minWidth: "40vw" }}>
       <Grid size={12}>
         <Box
           sx={{
@@ -56,6 +92,10 @@ export default function StepperExample() {
             mt: 4,
           }}
         >
+          <Typography>
+            Welcome {firstName}, some more details needed before we proceed.
+          </Typography>
+
           <Stepper activeStep={step} sx={{ width: "100%" }}>
             {steps.map((label, index) => (
               <Step key={index}>
@@ -70,7 +110,6 @@ export default function StepperExample() {
             sx={{
               display: "flex",
               width: "100%",
-
               gap: 2,
               justifyContent: "flex-end",
             }}
@@ -83,15 +122,21 @@ export default function StepperExample() {
               Back
             </Button>
             {step === steps.length - 1 ? (
-              <Button variant="contained" onClick={handleNext}>
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                disabled={isDisabled}
+              >
                 Finish
               </Button>
             ) : (
-              <>
-                <Button variant="contained" onClick={handleNext}>
-                  Next
-                </Button>
-              </>
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                disabled={isDisabled}
+              >
+                Next
+              </Button>
             )}
           </Box>
         </Box>
@@ -101,11 +146,7 @@ export default function StepperExample() {
 }
 
 function StepOne() {
-  return (
-    <>
-      <BasicAction />
-    </>
-  );
+  return <BasicAction />;
 }
 
 function StepTwo() {

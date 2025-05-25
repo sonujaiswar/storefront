@@ -37,14 +37,14 @@ export default function EditGenderAction() {
                 margin="normal"
                 select
               >
-                <MenuItem value="female">
+                <MenuItem value="Female">
                   {t("basicFormEditGenderMenu1")}
                 </MenuItem>
-                <MenuItem value="male">
+                <MenuItem value="Male">
                   {" "}
                   {t("basicFormEditGenderMenu2")}
                 </MenuItem>
-                <MenuItem value="other">
+                <MenuItem value="Other">
                   {" "}
                   {t("basicFormEditGenderMenu3")}
                 </MenuItem>

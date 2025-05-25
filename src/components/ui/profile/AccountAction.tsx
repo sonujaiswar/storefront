@@ -15,6 +15,7 @@ import DialogModel from "../../layouts/dialog/DialogModel";
 import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
 import { RootState } from "@/types/stateTypes";
+import { userSetPhone } from "@/controllers/slices/userSlice";
 
 export default function AccountAction() {
   const t = useTranslations("profilePage");
@@ -33,7 +34,7 @@ export default function AccountAction() {
 
   const phoneNumberLength = countryData?.phoneLength || 10;
   const dialCode = countryData?.dialCode || 91;
-
+  const phone = useSelector((state: RootState) => state.user.phone);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     const regex = new RegExp(`^\\d{0,${phoneNumberLength}}$`);
@@ -45,11 +46,13 @@ export default function AccountAction() {
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setTouched(true);
 
     if (phoneNumber.length !== phoneNumberLength) return;
 
     // Save logic here
+    dispatch(userSetPhone(phoneNumber));
     setPhoneNumber("");
     setTouched(false);
     dispatch(dialogReset());
@@ -97,7 +100,7 @@ export default function AccountAction() {
       <ProfileRow
         label={t("basicFormEditPhone")}
         tooltip="The phone number is required to verify your account."
-        value={`+${dialCode} ${phoneNumber || "xxxxxxxxxx"}`}
+        value={`+${dialCode} ${phone || "xxxxxxxxxx"}`}
         onEdit={() => dispatch(dialogSetKey("account"))}
         editLabel={t("basicFormEditPhoneLink")}
       />
