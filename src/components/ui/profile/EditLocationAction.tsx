@@ -115,8 +115,6 @@ export default function EditLocationAction() {
       </DialogModel>
 
       <>
-        <Typography variant="h6">{t("profileTitle")}</Typography>
-        <Divider sx={{ my: 2 }} />
         <ProfileRow
           label={t("basicFormEditCountry")}
           value={

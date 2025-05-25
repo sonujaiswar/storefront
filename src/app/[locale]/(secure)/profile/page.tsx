@@ -1,8 +1,9 @@
 "use client";
-import AccountAction from "@/components/ui/profile/AccountAction";
+import Account from "@/components/ui/profile/Account";
+
 import Basic from "@/components/ui/profile/Basic";
 import Profile from "@/components/ui/profile/Profile";
-import ProfileRow from "@/components/ui/profile/ProfileRow";
+
 import { Divider, Grid, Paper, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
@@ -24,7 +25,7 @@ export default function ProfilePage() {
         <Profile />
       </Grid>
       <Grid size={12}>
-        <AccountAction />
+        <Account />
       </Grid>
     </Grid>
   );

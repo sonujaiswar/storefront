@@ -10,16 +10,48 @@ import {
 } from "@mui/material";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DialogModel from "../../layouts/dialog/DialogModel";
 import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
+import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
+import { RootState } from "@/types/stateTypes";
 
 export default function AccountAction() {
   const t = useTranslations("profilePage");
-  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
   const dispatch = useDispatch();
+
+  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
+  const [touched, setTouched] = React.useState<boolean>(false);
+
+  const countryCode = useSelector(
+    (state: RootState) => state.location.area.countryCode
+  );
+
+  const countryData = countriesAndSubdivisions.find(
+    (c) => c.countryCode === countryCode
+  );
+
+  const phoneNumberLength = countryData?.phoneLength || 10;
+  const dialCode = countryData?.dialCode || 91;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    const regex = new RegExp(`^\\d{0,${phoneNumberLength}}$`);
+
+    if (regex.test(val)) {
+      setPhoneNumber(val);
+    }
+  };
+
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTouched(true);
+
+    if (phoneNumber.length !== phoneNumberLength) return;
+
+    // Save logic here
+    setPhoneNumber("");
+    setTouched(false);
     dispatch(dialogReset());
   };
   return (
@@ -32,15 +64,17 @@ export default function AccountAction() {
                 label={t("basicFormEditPhone")}
                 fullWidth
                 required
+                type="tel"
                 value={phoneNumber}
-                onChange={(e) => {
-                  const val = e.target.value;
-
-                  // Allow only digits
-                  if (/^\d{0,10}$/.test(val)) {
-                    setPhoneNumber(val);
-                  }
-                }}
+                onChange={handleChange}
+                onBlur={() => setTouched(true)}
+                error={touched && phoneNumber.length !== phoneNumberLength}
+                helperText={
+                  touched && phoneNumber.length !== phoneNumberLength
+                    ? t("phoneValidationError", { count: phoneNumberLength }) ||
+                      `Phone number must be exactly ${phoneNumberLength} digits`
+                    : " "
+                }
                 margin="normal"
               />
             </Grid>
@@ -52,24 +86,21 @@ export default function AccountAction() {
           </Grid>
         </Box>
       </DialogModel>
-      <Paper sx={{ p: 2 }}>
-        <Typography variant="h6">{t("accountTitle")}</Typography>
-        <Divider sx={{ my: 2 }} />
 
-        <ProfileRow
-          label={t("basicFormEditEmail")}
-          value="a6GxO@example.com"
-          tooltip="The email address you use to sign in to your account."
-        />
-        <Divider sx={{ my: 1 }} />
+      <ProfileRow
+        label={t("basicFormEditEmail")}
+        value="a6GxO@example.com"
+        tooltip="The email address you use to sign in to your account."
+      />
+      <Divider sx={{ my: 1 }} />
 
-        <ProfileRow
-          label={t("basicFormEditPhone")}
-          value="+91 1234567890"
-          onEdit={() => dispatch(dialogSetKey("account"))}
-          editLabel={t("basicFormEditPhoneLink")}
-        />
-      </Paper>
+      <ProfileRow
+        label={t("basicFormEditPhone")}
+        tooltip="The phone number is required to verify your account."
+        value={`+${dialCode} ${phoneNumber || "xxxxxxxxxx"}`}
+        onEdit={() => dispatch(dialogSetKey("account"))}
+        editLabel={t("basicFormEditPhoneLink")}
+      />
     </>
   );
 }

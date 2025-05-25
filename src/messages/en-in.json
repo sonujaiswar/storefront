@@ -162,6 +162,7 @@
 
     "basicFormEditPhone": "Phone number",
     "basicFormEditPhoneLink": "Edit phone number",
-    "basicFormEditPhoneButtonText": "Update phone number"
+    "basicFormEditPhoneButtonText": "Update phone number",
+    "phoneValidationError": "Phone number must be exactly {count} digits"
   }
 }

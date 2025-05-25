@@ -2540,7 +2540,7 @@ export const countriesAndSubdivisions: countriesAndSubdivisionsTypes[] = [
       { code: "IN-MP", name: "Madhya Pradesh" },
       { code: "IN-CT", name: "Chhattisgarh" },
     ],
-    phoneCode: 91,
+    dialCode: 91,
     phoneLength: 10,
   },
   {

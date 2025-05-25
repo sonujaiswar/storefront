@@ -26,6 +26,9 @@ export default function Mainmenu() {
   }, [pathname]);
 
   const stripedPathname = useSelector((state: RootState) => state.utils.path);
+  const firstName = useSelector(
+    (state: RootState) => state.user.user.first_name
+  );
   return (
     <List>
       <ListSubheader
@@ -33,7 +36,7 @@ export default function Mainmenu() {
         id="nested-list-subheader"
         sx={{ fontWeight: 600, fontFamily: "Roboto" }}
       >
-        {t("ProtectedSidebarText.navigationSubHeader")}, USER
+        {t("ProtectedSidebarText.navigationSubHeader")}, {firstName}
       </ListSubheader>
       {secureRoutes.map((obj, index) => {
         const isSelected = stripedPathname === obj.url;

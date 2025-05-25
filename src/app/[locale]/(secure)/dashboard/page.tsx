@@ -49,24 +49,26 @@ const DashboardPage = () => {
   ];
 
   return (
-    <Grid container spacing={3}>
-      <Grid size={12}>
-        <Typography variant="h4">{t("dashboardPage.title")}</Typography>
-        <Divider sx={{ my: 2 }} />
-        <Typography variant="body2" color="text.secondary">
-          {t("dashboardPage.description")}
-        </Typography>
-      </Grid>
-      {items.map((item, index) => (
-        <Grid
-          size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
-          key={index}
-          sx={{ mt: 2 }}
-        >
-          <DashboardCard {...item} />
+    <>
+      <Grid container spacing={3}>
+        <Grid size={12}>
+          <Typography variant="h4">{t("dashboardPage.title")}</Typography>
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="body2" color="text.secondary">
+            {t("dashboardPage.description")}
+          </Typography>
         </Grid>
-      ))}
-    </Grid>
+        {items.map((item, index) => (
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
+            key={index}
+            sx={{ mt: 2 }}
+          >
+            <DashboardCard {...item} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };
 

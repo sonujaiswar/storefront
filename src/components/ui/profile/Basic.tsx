@@ -13,6 +13,7 @@ import { useTranslations } from "next-intl";
 import EditNameAction from "./EditNameAction";
 import EditDOBAction from "./EditDOBAction";
 import EditGenderAction from "./EditGenderAction";
+import BasicAction from "./BasicAction";
 
 export default function Basic() {
   const t = useTranslations("profilePage");
@@ -42,11 +43,7 @@ export default function Basic() {
 
         <Typography variant="h6">{t("basicTitle")}</Typography>
         <Divider sx={{ my: 2 }} />
-        <EditNameAction />
-        <Divider sx={{ my: 1 }} />
-        <EditDOBAction />
-        <Divider sx={{ my: 1 }} />
-        <EditGenderAction />
+        <BasicAction />
       </Paper>
     </>
   );

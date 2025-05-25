@@ -46,7 +46,7 @@ export default function EditDOBAction() {
             </LocalizationProvider>
             <Grid size={12} display="flex" justifyContent={"end"}>
               <Button type="submit" variant="contained">
-                {t("basicFormEditPhoneButtonText")}
+                {t("basicFormEditDOBButtonText")}
               </Button>
             </Grid>
           </Grid>
