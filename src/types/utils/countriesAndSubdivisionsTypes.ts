@@ -5,4 +5,6 @@ export interface countriesAndSubdivisionsTypes {
     code: string;
     name: string;
   }[];
+  phoneCode?: number;
+  phoneLength?: number;
 }

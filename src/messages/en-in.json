@@ -156,6 +156,12 @@
     "basicFormEditLanguageMenu1": "English",
     "basicFormEditLanguageMenu2": "Hindi",
     "basicFormEditLanguageMenu3": "Other",
-    "basicFormEditLanguageButtonText": "Update Language"
+    "basicFormEditLanguageButtonText": "Update Language",
+    "accountTitle": "Account",
+    "basicFormEditEmail": "Email address",
+
+    "basicFormEditPhone": "Phone number",
+    "basicFormEditPhoneLink": "Edit phone number",
+    "basicFormEditPhoneButtonText": "Update phone number"
   }
 }

@@ -23,8 +23,11 @@ export const userSlice = createSlice({
     userSetDOB: (state, action: PayloadAction<string>) => {
       state.dob = action.payload;
     },
+    userSetGender: (state, action: PayloadAction<string>) => {
+      state.gender = action.payload;
+    },
   },
 });
 
-export const { userSetFullName, userSetDOB } = userSlice.actions;
+export const { userSetFullName, userSetDOB, userSetGender } = userSlice.actions;
 export default userSlice.reducer;

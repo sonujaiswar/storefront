@@ -3,11 +3,7 @@ import { format } from "date-fns";
 import { parseISO } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileRow from "./ProfileRow";
-import {
-  dialogReset,
-  dialogSetKey,
-  dialogToggle,
-} from "@/controllers/slices/dialogSlice";
+import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
@@ -50,7 +46,7 @@ export default function EditDOBAction() {
             </LocalizationProvider>
             <Grid size={12} display="flex" justifyContent={"end"}>
               <Button type="submit" variant="contained">
-                {t("basicFormEditDOBButtonText")}
+                {t("basicFormEditPhoneButtonText")}
               </Button>
             </Grid>
           </Grid>

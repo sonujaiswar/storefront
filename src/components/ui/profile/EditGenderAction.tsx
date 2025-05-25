@@ -2,16 +2,20 @@ import React from "react";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import { RootState } from "@/types/stateTypes";
+import { userSetGender } from "@/controllers/slices/userSlice";
 export default function EditGenderAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
   const [selectGender, setSelectGender] = React.useState<string>("");
+  const gender = useSelector((state: RootState) => state.user.gender);
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(userSetGender(selectGender));
     dispatch(dialogReset());
   };
   return (
@@ -58,7 +62,7 @@ export default function EditGenderAction() {
 
       <ProfileRow
         label={t("basicFormEditGender")}
-        value="Female"
+        value={gender}
         onEdit={() => dispatch(dialogSetKey("EditGender"))}
         editLabel={t("basicFormEditGenderTitle")}
       />
