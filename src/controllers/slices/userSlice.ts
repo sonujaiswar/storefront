@@ -7,6 +7,7 @@ interface UserState {
   gender: string | null;
   dob: string | null;
   phone: string | null;
+  email: string | null;
 }
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
   dob: "",
   gender: "",
   phone: "",
+  email: "",
 };
 
 export const userSlice = createSlice({
@@ -32,9 +34,12 @@ export const userSlice = createSlice({
     userSetPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload;
     },
+    userSetEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
   },
 });
 
-export const { userSetFullName, userSetDOB, userSetGender, userSetPhone } =
+export const { userSetFullName, userSetDOB, userSetGender, userSetPhone, userSetEmail } =
   userSlice.actions;
 export default userSlice.reducer;

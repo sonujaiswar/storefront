@@ -165,11 +165,16 @@
     "basicFormEditLanguageButtonText": "Update Language",
     "accountTitle": "Account",
     "basicFormEditEmail": "Email address",
+    "basicFormEditEmailLink": "Edit email address",
+    "basicFormEditEmailButtonText": "Update email address",
+    "basicFormEditEmailTooltip": "The email address you use to sign in to your account.",
 
     "basicFormEditPhone": "Phone number",
     "basicFormEditPhoneLink": "Edit phone number",
     "basicFormEditPhoneButtonText": "Update phone number",
+    "basicFormEditPhoneTooltip": "The phone number is required to verify your account.",
     "phoneValidationError": "Phone number must be exactly {count} digits",
+
     "basicFormEditFirstNameTextFieldHelperText": "First name is required"
   }
 }

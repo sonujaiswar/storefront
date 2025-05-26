@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Grid, TextField } from "@mui/material";
 import ProfileRow from "./ProfileRow";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +27,8 @@ export default function AccountAction() {
   const phoneNumberLength = countryData?.phoneLength || 10;
   const dialCode = countryData?.dialCode || 91;
   const phone = useSelector((state: RootState) => state.user.phone);
+
+  const email = useSelector((state: RootState) => state.user.email);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     const regex = new RegExp(`^\\d{0,${phoneNumberLength}}$`);
@@ -91,14 +85,14 @@ export default function AccountAction() {
 
       <ProfileRow
         label={t("basicFormEditEmail")}
-        value="a6GxO@example.com"
-        tooltip="The email address you use to sign in to your account."
+        value={email}
+        tooltip={t("basicFormEditEmailTooltip")}
       />
       <Divider sx={{ my: 1 }} />
 
       <ProfileRow
         label={t("basicFormEditPhone")}
-        tooltip="The phone number is required to verify your account."
+        tooltip={t("basicFormEditPhoneTooltip")}
         value={`+${dialCode} ${phone || "xxxxxxxxxx"}`}
         onEdit={() => dispatch(dialogSetKey("account"))}
         editLabel={t("basicFormEditPhoneLink")}

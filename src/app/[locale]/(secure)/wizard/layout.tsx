@@ -1,3 +1,4 @@
+import Protectedmode from "@/app/system/Protectedmode";
 import SinglePage from "@/components/layouts/common/SinglePage";
 
 export default function layout({
@@ -5,7 +6,9 @@ export default function layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <SinglePage>{children}</SinglePage>
+      <Protectedmode>
+        <SinglePage>{children}</SinglePage>
+      </Protectedmode>
     </>
   );
 }
