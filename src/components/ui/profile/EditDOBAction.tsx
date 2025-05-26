@@ -23,9 +23,12 @@ export default function EditDOBAction() {
   const [dateofbirth, setDob] = React.useState<Date | null>(
     dob ? new Date(dob) : null
   );
+  const [touched, setTouched] = React.useState<boolean>(false);
+
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(userSetDOB(dateofbirth?.toISOString() || ""));
+    setDob(null);
     dispatch(dialogReset());
   };
   return (
@@ -40,7 +43,18 @@ export default function EditDOBAction() {
                   shouldDisableDate={(date) => date > new Date()}
                   value={dateofbirth}
                   onChange={(newValue) => setDob(newValue)}
-                  slotProps={{ textField: { fullWidth: true } }}
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      required: true,
+                      onBlur: () => setTouched(true),
+                      error: touched && !dateofbirth,
+                      helperText:
+                        touched && !dateofbirth
+                          ? t("basicFormEditDOBError")
+                          : "",
+                    },
+                  }}
                 />
               </Grid>
             </LocalizationProvider>
@@ -56,7 +70,7 @@ export default function EditDOBAction() {
       <ProfileRow
         label={t("basicFormEditDOB")}
         value={displayDOB}
-        tooltip="Your date of birth is needed for account security and to help us personalize your experience."
+        tooltip={t("basicFormEditDOBTooltip")}
         onEdit={() => dispatch(dialogSetKey("EditDOB"))}
         editLabel={t("basicFormEditDOBLink")}
       />

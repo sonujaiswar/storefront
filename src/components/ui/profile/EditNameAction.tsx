@@ -16,9 +16,9 @@ export default function EditNameAction() {
   );
   const lastName = useSelector((state: RootState) => state.user.user.last_name);
 
-  const [first_name, setFirstName] = React.useState<string>("");
-  const [last_name, setlastName] = React.useState<string>("");
-
+  const [first_name, setFirstName] = React.useState<string>(firstName);
+  const [last_name, setlastName] = React.useState<string>(lastName);
+  const [touched, setTouched] = React.useState<boolean>(false);
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(userSetFullName({ first_name, last_name }));
@@ -38,6 +38,13 @@ export default function EditNameAction() {
                 label={t("basicFormFirstName")}
                 fullWidth
                 required
+                onBlur={() => setTouched(true)}
+                error={touched && !first_name}
+                helperText={
+                  touched && !first_name
+                    ? t("basicFormEditFirstNameTextFieldHelperText")
+                    : ""
+                }
                 value={first_name}
                 onChange={(e) => setFirstName(e.target.value)}
                 margin="normal"

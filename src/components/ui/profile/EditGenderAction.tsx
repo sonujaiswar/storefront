@@ -13,6 +13,8 @@ export default function EditGenderAction() {
   const t = useTranslations("profilePage");
   const [selectGender, setSelectGender] = React.useState<string>("");
   const gender = useSelector((state: RootState) => state.user.gender);
+  const [touched, setTouched] = React.useState<boolean>(false);
+
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(userSetGender(selectGender));
@@ -34,6 +36,13 @@ export default function EditGenderAction() {
                 required
                 value={selectGender}
                 onChange={(e) => setSelectGender(e.target.value)}
+                onBlur={() => setTouched(true)}
+                error={touched && !selectGender}
+                helperText={
+                  touched && !selectGender
+                    ? t("basicFormEditGenderHelperText")
+                    : ""
+                }
                 margin="normal"
                 select
               >
@@ -41,11 +50,9 @@ export default function EditGenderAction() {
                   {t("basicFormEditGenderMenu1")}
                 </MenuItem>
                 <MenuItem value="Male">
-                  {" "}
                   {t("basicFormEditGenderMenu2")}
                 </MenuItem>
                 <MenuItem value="Other">
-                  {" "}
                   {t("basicFormEditGenderMenu3")}
                 </MenuItem>
               </TextField>
@@ -64,7 +71,7 @@ export default function EditGenderAction() {
         label={t("basicFormEditGender")}
         value={gender}
         onEdit={() => dispatch(dialogSetKey("EditGender"))}
-        editLabel={t("basicFormEditGenderTitle")}
+        editLabel={t("basicFormEditGenderLink")}
       />
     </>
   );

@@ -74,8 +74,7 @@ export default function AccountAction() {
                 error={touched && phoneNumber.length !== phoneNumberLength}
                 helperText={
                   touched && phoneNumber.length !== phoneNumberLength
-                    ? t("phoneValidationError", { count: phoneNumberLength }) ||
-                      `Phone number must be exactly ${phoneNumberLength} digits`
+                    ? t("phoneValidationError", { count: phoneNumberLength })
                     : " "
                 }
                 margin="normal"

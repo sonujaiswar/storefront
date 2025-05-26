@@ -137,8 +137,14 @@
     "basicFormEditDOBTitle": "Edit Date of Birth",
     "basicFormEditDOB": "Date of Birth",
     "basicFormEditDOBButtonText": "Update DOB",
+    "basicFormEditDOBError": "Please enter a valid date of birth.",
+    "basicFormEditDOBTooltip": "Your date of birth is needed for account security and to help us personalize your experience.",
     "basicFormEditGenderTitle": "Edit Gender",
     "basicFormEditGender": "Gender",
+    "basicFormEditGenderTooltip": "Your gender is needed for account security and to help us personalize your experience.",
+    "basicFormEditGenderLink": "Edit Gender",
+
+    "basicFormEditGenderHelperText": "Select Gender for account security and to help us personalize your experience.",
     "basicFormEditGenderMenu1": "Female",
     "basicFormEditGenderMenu2": "Male",
     "basicFormEditGenderMenu3": "Other",
@@ -146,7 +152,7 @@
     "basicFormEditGenderButtonText": "Update Gender",
     "basicFormEditProvince": "Edit Location",
     "basicFormEditCountryLink": "Edit Location",
-
+    "basicFormEditCountryHelperText": "Country is required",
     "basicFormEditStateProvince": "State or Province",
     "basicFormEditCountry": "Country",
     "basicFormEditLocationButtonText": "Update Location",
@@ -163,6 +169,7 @@
     "basicFormEditPhone": "Phone number",
     "basicFormEditPhoneLink": "Edit phone number",
     "basicFormEditPhoneButtonText": "Update phone number",
-    "phoneValidationError": "Phone number must be exactly {count} digits"
+    "phoneValidationError": "Phone number must be exactly {count} digits",
+    "basicFormEditFirstNameTextFieldHelperText": "First name is required"
   }
 }

@@ -40,6 +40,7 @@ export default function EditLocationAction() {
     );
 
   const isProvinceAvailable = selectedCountry?.subdivisions?.length! > 0;
+  const [touched, setTouched] = React.useState<boolean>(false);
 
   function handleSave(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -78,6 +79,13 @@ export default function EditLocationAction() {
                     required
                     margin="normal"
                     fullWidth
+                    onBlur={() => setTouched(true)}
+                    error={touched && !selectedCountryCode}
+                    helperText={
+                      touched && !selectedCountryCode
+                        ? t("basicFormEditCountryHelperText")
+                        : ""
+                    }
                   />
                 )}
               />
