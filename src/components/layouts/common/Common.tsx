@@ -10,6 +10,7 @@ import { settingsToggleDrawer } from "@/controllers/slices/settingsSlice";
 
 import DrawerMode from "@/components/layouts/sidebar/DrawerMode";
 import Unprotectedmode from "@/app/system/Unprotectedmode";
+import { sessionSetProtectedMode } from "@/controllers/slices/sessionSlice";
 
 const drawerWidth = 240;
 
@@ -43,13 +44,18 @@ const Main = styled("main", {
 
 export default function Common({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  protectedMode = false,
+}: Readonly<{ children: React.ReactNode; protectedMode?: boolean }>) {
   const open = useSelector((state: RootState) => state.settings.isDrawerOpen);
   const dispatch = useDispatch();
   const isMobile = useSelector((state: RootState) => state.settings.isMobile);
   const handleDrawerClose = () => {
     dispatch(settingsToggleDrawer());
   };
+
+  React.useEffect(() => {
+    dispatch(sessionSetProtectedMode(protectedMode));
+  }, []);
 
   return (
     <Unprotectedmode>

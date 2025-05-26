@@ -7,7 +7,7 @@ export default function Dashboardlayout({
   return (
     <>
       <Protectedmode>
-        <Common>{children}</Common>
+        <Common protectedMode={true}>{children}</Common>
       </Protectedmode>
     </>
   );

@@ -1,7 +1,7 @@
 // components/ProfileRow.tsx
 import { Grid, Typography, Button, Tooltip } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 interface ProfileRowProps {
   label: string;
   value: any;
@@ -11,6 +11,7 @@ interface ProfileRowProps {
   labelSize?: number;
   valueSize?: number;
   actionSize?: number;
+  isVerified?: boolean;
 }
 
 export default function ProfileRow({
@@ -22,6 +23,7 @@ export default function ProfileRow({
   labelSize = 3,
   valueSize = 5,
   actionSize = 4,
+  isVerified = false,
 }: ProfileRowProps) {
   return (
     <Grid
@@ -43,7 +45,13 @@ export default function ProfileRow({
         </Typography>
       </Grid>
       <Grid size={valueSize}>
-        <Typography variant="subtitle1">{value}</Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+        >
+          {value}{" "}
+          {isVerified && <CheckCircleIcon color="success" sx={{ ml: 1 }} />}
+        </Typography>
       </Grid>
       <Grid size={actionSize} sx={{ textAlign: "right" }}>
         {onEdit && <Button onClick={onEdit}>{editLabel}</Button>}

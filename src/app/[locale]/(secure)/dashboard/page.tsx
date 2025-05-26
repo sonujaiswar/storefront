@@ -5,6 +5,8 @@ import { Typography, Grid, Divider } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/stateTypes";
 
 const DashboardPage = () => {
   const t = useTranslations();
@@ -47,12 +49,16 @@ const DashboardPage = () => {
       url: NavigationRoutes.securityPage.url,
     },
   ];
-
+  const checkProtectedMode = useSelector(
+    (state: RootState) => state.session.isProtectedMode
+  );
   return (
     <>
       <Grid container spacing={3}>
         <Grid size={12}>
-          <Typography variant="h4">{t("dashboardPage.title")}</Typography>
+          <Typography variant="h4">
+            {t("dashboardPage.title")} {checkProtectedMode.valueOf().toString()}
+          </Typography>
           <Divider sx={{ my: 2 }} />
           <Typography variant="body2" color="text.secondary">
             {t("dashboardPage.description")}

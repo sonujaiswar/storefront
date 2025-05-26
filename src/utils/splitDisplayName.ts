@@ -1,17 +1,17 @@
 function splitDisplayName(displayName: string): {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
 } {
   const parts = displayName.trim().split(/\s+/);
 
   if (parts.length === 0) {
-    return { firstName: "", lastName: "" };
+    return { first_name: "", last_name: "" };
   }
 
-  const firstName = parts[0];
-  const lastName = parts.length > 1 ? parts.slice(1).join(" ") : "";
+  const first_name = parts[0];
+  const last_name = parts.length > 1 ? parts.slice(1).join(" ") : "";
 
-  return { firstName, lastName };
+  return { first_name, last_name };
 }
 
 export default splitDisplayName;

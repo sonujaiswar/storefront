@@ -1,21 +1,17 @@
-import { UserBasicTypes, UserDOBTypes } from "@/types/user/userTypes";
+import { UserBasicTypes, UserTypes } from "@/types/user/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { use } from "react";
 
-interface UserState {
-  user: UserBasicTypes;
-  gender: string | null;
-  dob: string | null;
-  phone: string | null;
-  email: string | null;
-}
-
-const initialState: UserState = {
+const initialState: UserTypes = {
   user: { first_name: "", last_name: "" },
   dob: "",
   gender: "",
   phone: "",
   email: "",
+  isEmailVerified: false,
+  photoURL: "",
+  uid: "",
+  providerId: "",
 };
 
 export const userSlice = createSlice({
@@ -37,9 +33,30 @@ export const userSlice = createSlice({
     userSetEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
+    userSetEmailVerified: (state, action: PayloadAction<boolean>) => {
+      state.isEmailVerified = action.payload;
+    },
+    userSetPhotoURL: (state, action: PayloadAction<string>) => {
+      state.photoURL = action.payload;
+    },
+    userSetUID: (state, action: PayloadAction<string>) => {
+      state.uid = action.payload;
+    },
+    userSetProviderId: (state, action: PayloadAction<string>) => {
+      state.providerId = action.payload;
+    },
   },
 });
 
-export const { userSetFullName, userSetDOB, userSetGender, userSetPhone, userSetEmail } =
-  userSlice.actions;
+export const {
+  userSetFullName,
+  userSetDOB,
+  userSetGender,
+  userSetPhone,
+  userSetEmail,
+  userSetEmailVerified,
+  userSetPhotoURL,
+  userSetUID,
+  userSetProviderId,
+} = userSlice.actions;
 export default userSlice.reducer;

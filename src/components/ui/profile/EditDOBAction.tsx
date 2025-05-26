@@ -43,6 +43,7 @@ export default function EditDOBAction() {
                   shouldDisableDate={(date) => date > new Date()}
                   value={dateofbirth}
                   onChange={(newValue) => setDob(newValue)}
+                  format="dd-MM-yyyy"
                   slotProps={{
                     textField: {
                       fullWidth: true,

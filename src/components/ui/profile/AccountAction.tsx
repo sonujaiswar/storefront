@@ -29,6 +29,9 @@ export default function AccountAction() {
   const phone = useSelector((state: RootState) => state.user.phone);
 
   const email = useSelector((state: RootState) => state.user.email);
+  const isEmailVerified = useSelector(
+    (state: RootState) => state.user.isEmailVerified
+  );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     const regex = new RegExp(`^\\d{0,${phoneNumberLength}}$`);
@@ -87,6 +90,7 @@ export default function AccountAction() {
         label={t("basicFormEditEmail")}
         value={email}
         tooltip={t("basicFormEditEmailTooltip")}
+        isVerified={isEmailVerified}
       />
       <Divider sx={{ my: 1 }} />
 
