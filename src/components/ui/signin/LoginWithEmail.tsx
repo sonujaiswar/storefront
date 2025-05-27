@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import PasswordIcon from "@mui/icons-material/Password";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
+  Alert,
   Box,
   Button,
+  Collapse,
   InputAdornment,
   Stack,
   TextField,
@@ -17,22 +19,39 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { NavigationRoutes } from "@/constants/NavigationRoutes";
 import { useEmailPassword } from "@/hooks/useEmailPassword";
+import { FormInputField } from "../security/Action";
 
 export default function LoginWithEmail() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const t = useTranslations("signinPage");
   const { signInWithEmail, error } = useEmailPassword();
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (error) {
+      setIsOpen(true);
+    }
+  }, [error]);
+
   return (
     <>
+      {error && (
+        <Collapse in={isOpen} sx={{ mb: 2 }}>
+          <Alert severity="error" onClose={() => setIsOpen(false)}>
+            {error}
+          </Alert>
+        </Collapse>
+      )}
       <Box
         component="form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
+          setIsOpen(true);
           signInWithEmail(email, password);
         }}
+        sx={{ gap: 2, display: "flex", flexDirection: "column" }}
       >
-        {/* Email/Password Sign-in */}
         <TextField
           label={t("textfieldEmail")}
           variant="outlined"
@@ -48,9 +67,14 @@ export default function LoginWithEmail() {
           }}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          sx={{ mb: 2 }}
         />
-        <TextField
+        <FormInputField
+          name="password"
+          label={t("textfieldPassword")}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+        {/* <TextField
           label={t("textfieldPassword")}
           type="password"
           variant="outlined"
@@ -67,7 +91,7 @@ export default function LoginWithEmail() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           sx={{ mb: 3 }}
-        />
+        /> */}
         <Button
           fullWidth
           variant="contained"

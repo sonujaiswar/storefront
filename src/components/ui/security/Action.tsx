@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PasswordIcon from "@mui/icons-material/Password";
 
 export default function SecurityUI() {
   const dispatch = useDispatch();
@@ -118,6 +119,11 @@ export function FormInputField({
         slotProps={{
           input: {
             autoComplete: "new-password",
+            startAdornment: (
+              <InputAdornment position="start">
+                <PasswordIcon />
+              </InputAdornment>
+            ),
             endAdornment: (
               <InputAdornment position="end">
                 <Button

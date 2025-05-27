@@ -2,11 +2,10 @@
 
 import { sessionSetProtectedMode } from "@/controllers/slices/sessionSlice";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useUserManagement } from "@/hooks/useUserManagement";
 import { useRouter, usePathname } from "next/navigation";
 import AccessDenied from "@/components/ui/AccessDenied/Action";
-
 
 export default function ProtectedMode({
   children,

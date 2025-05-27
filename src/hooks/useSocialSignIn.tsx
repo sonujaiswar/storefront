@@ -4,6 +4,8 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase/firebaseAuth";
 import useUserDispatch from "./useUserDispatch";
 import { extractUserDetails } from "@/utils/extractUserDetails";
+import { FirebaseError } from "firebase/app";
+import { FirebaseErrorSimplified } from "@/utils/firebaseErrorMessages";
 
 export function useSocialSignIn() {
   const [error, setError] = useState<string | null>(null);
@@ -15,14 +17,16 @@ export function useSocialSignIn() {
       const user = result.user;
       const userDetails = extractUserDetails(user);
       userAuthenticate(userDetails);
-    } catch (error) {
-      setError((error as Error).message);
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        setError(FirebaseErrorSimplified(error));
+      }
+      // setError((error as Error).message);
     }
   };
 
   return {
     signInWithGoogle,
-
     error,
   };
 }

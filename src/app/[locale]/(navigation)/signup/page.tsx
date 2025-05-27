@@ -1,14 +1,23 @@
 "use client";
 import React from "react";
 import { useEmailPassword } from "@/hooks/useEmailPassword";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Collapse,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { FormInputField } from "@/components/ui/security/Action";
-
+import EmailIcon from "@mui/icons-material/Email";
+import PersonIcon from "@mui/icons-material/Person";
 export default function signUpPage() {
   const t = useTranslations("signupPage");
-  const { signUpWithEmail } = useEmailPassword();
+  const { signUpWithEmail, error } = useEmailPassword();
   const [firstname, setFirstName] = React.useState<string>("");
   const [lastname, setLastName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -17,6 +26,14 @@ export default function signUpPage() {
     e.preventDefault();
     signUpWithEmail(email, password);
   };
+  const [isOpen, setIsOpen] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (error) {
+      setIsOpen(true);
+    }
+  }, [error]);
+
   return (
     <>
       <Box mt={2} display="flex" flexDirection="column" gap={2}>
@@ -24,22 +41,33 @@ export default function signUpPage() {
           {t("title")}
         </Typography>
         <Typography>{t("description")}</Typography>
-        <Box component={"form"} onSubmit={handleSubmit}>
+        {error && (
+          <Collapse in={isOpen} sx={{ mb: 2 }}>
+            <Alert severity="error" onClose={() => setIsOpen(false)}>
+              {error}
+            </Alert>
+          </Collapse>
+        )}
+        <Box
+          component={"form"}
+          onSubmit={handleSubmit}
+          sx={{ gap: 2, display: "flex", flexDirection: "column" }}
+        >
           <TextField
             label={t("formFirstName")}
             name="Firstname"
             fullWidth
             value={firstname}
             onChange={(e) => setFirstName(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            label={t("formLastName")}
-            name="Lastname"
-            fullWidth
-            value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
-            margin="normal"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonIcon />
+                  </InputAdornment>
+                ),
+              },
+            }}
           />
           <TextField
             label={t("formEmail")}
@@ -47,8 +75,17 @@ export default function signUpPage() {
             type="email"
             fullWidth
             value={email}
+            required
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                ),
+              },
+            }}
             onChange={(e) => setEmail(e.target.value)}
-            margin="normal"
           />
           <FormInputField
             name="password"
@@ -56,13 +93,6 @@ export default function signUpPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <TextField
-            label={t("formPassword")}
-            name="password"
-            type="password"
-            fullWidth
-            margin="normal"
-          /> */}
 
           <Button
             type="submit"
