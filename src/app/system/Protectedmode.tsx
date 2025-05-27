@@ -2,9 +2,11 @@
 
 import { sessionSetProtectedMode } from "@/controllers/slices/sessionSlice";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useUserManagement } from "@/hooks/useUserManagement";
 import { useRouter, usePathname } from "next/navigation";
+import AccessDenied from "@/components/ui/AccessDenied/Action";
+import { RootState } from "@/types/stateTypes";
 
 export default function ProtectedMode({
   children,
@@ -24,14 +26,12 @@ export default function ProtectedMode({
       router.push(`/signin?callbackUrl=${encodedPath}`);
     }
   }, [checkingAuth, isAuthenticated, pathname, router]);
-
-  if (checkingAuth) {
-    return <div>Checking authentication...</div>;
+  if (!checkingAuth && !isAuthenticated) {
+    return <AccessDenied />;
   }
-
-  if (!isAuthenticated) {
-    return <div>Access denied. Redirecting...</div>;
-  }
+  // if (checkingAuth) {
+  //   return <div>Checking authentication...</div>;
+  // }
 
   return <>{children}</>;
 }

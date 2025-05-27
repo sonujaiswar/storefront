@@ -176,5 +176,10 @@
     "phoneValidationError": "Phone number must be exactly {count} digits",
 
     "basicFormEditFirstNameTextFieldHelperText": "First name is required"
+  },
+  "access-denied": {
+    "title": "Access Denied",
+    "description": "You must be logged in to view this page. Redirecting to sign-in...",
+    "buttonText": "Sign In"
   }
 }

@@ -56,7 +56,7 @@ export function useUserManagement() {
   const redirectAfterLogin = () => {
     if (authUser && !isLoading) {
       const redirectUrl = getRedirectUrl();
-      console.log("Redirecting to:", redirectUrl);
+
       router.push(redirectUrl);
     }
   };
