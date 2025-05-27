@@ -7,6 +7,7 @@ import { useUserManagement } from "@/hooks/useUserManagement";
 import { useRouter, usePathname } from "next/navigation";
 import AccessDenied from "@/components/ui/AccessDenied/Action";
 
+
 export default function ProtectedMode({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

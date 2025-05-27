@@ -1,24 +1,58 @@
+"use client";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  UserCredential,
+} from "firebase/auth";
 import { auth } from "@/lib/firebase/firebaseAuth";
+import useUserDispatch from "./useUserDispatch";
+import { extractUserDetails } from "@/utils/extractUserDetails";
 
 export function useEmailPassword() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const { userAuthenticate } = useUserDispatch();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const signInWithEmail = async (email: string, password: string) => {
+  const callbackUrl = searchParams.get("callbackUrl") || "";
+
+  // fn must return Promise<UserCredential>
+  const handleAuth = async (fn: () => Promise<UserCredential>) => {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      setError((error as Error).message);
+      const result = await fn();
+      const user = result.user;
+      const userDetails = extractUserDetails(user);
+      userAuthenticate(userDetails);
+      return user;
+    } catch (err) {
+      setError((err as Error).message);
+      return null;
     } finally {
       setLoading(false);
     }
   };
 
+  const signInWithEmail = async (email: string, password: string) => {
+    await handleAuth(() => signInWithEmailAndPassword(auth, email, password));
+  };
+
+  const signUpWithEmail = async (email: string, password: string) => {
+    const user = await handleAuth(() =>
+      createUserWithEmailAndPassword(auth, email, password)
+    );
+    if (user) {
+      const encodedCallback = encodeURIComponent(callbackUrl);
+      router.push(`/wizard?callbackUrl=${encodedCallback}`);
+    }
+  };
+
   return {
     signInWithEmail,
+    signUpWithEmail,
     error,
     loading,
   };

@@ -77,7 +77,7 @@ export default function SecurityUI() {
   );
 }
 
-function FormInputField({
+export function FormInputField({
   name,
   label,
   value,
