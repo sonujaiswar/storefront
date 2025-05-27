@@ -1,22 +1,40 @@
-/*************  ✨ Windsurf Command ⭐  *************/
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase/firebaseAuth";
+"use client"; // Ensure this for App Router (if needed)
 
-export function useFirebaseAuth() {
-  const [user, setUser] = useState(null);
+import { useState, useEffect } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "@/lib/firebase/firebaseAuth";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { sessionSetAuthMode } from "@/controllers/slices/sessionSlice";
+
+export function useUserManagement() {
+  const [authUser, setAuthUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
+    let isMounted = true;
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (!isMounted) return;
+
+      if (!currentUser) {
+        router.push("/signin");
+      } else {
+        dispatch(sessionSetAuthMode(true));
+      }
+
+      setAuthUser(currentUser);
       setIsLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
   }, []);
 
-  return { user, isLoading };
-}
+  const isAuthenticated = !!authUser;
 
-/*******  e9158c52-5048-4eed-b223-18497e9bdc08  *******/
+  return { isAuthenticated, isLoading };
+}
