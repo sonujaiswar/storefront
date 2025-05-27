@@ -12,11 +12,9 @@ import LoginWithEmail from "@/components/ui/signin/LoginWithEmail";
 import LoginWithSocial from "@/components/ui/signin/LoginWithSocial";
 import SocialIcon from "@/components/ui/signin/SocialIcon";
 import { useUserManagement } from "@/hooks/useUserManagement";
-import { useRouter } from "next/navigation";
-
 export default function SignInPage() {
   const [useEmail, setUseEmail] = useState(false);
-  const router = useRouter();
+
   const t = useTranslations("signinPage");
   const { redirectAfterLogin } = useUserManagement();
   React.useEffect(() => {

@@ -12,6 +12,8 @@ const initialState: UserTypes = {
   photoURL: "",
   uid: "",
   providerId: "",
+  createdAt: "",
+  lastLoginAt: "",
 };
 
 export const userSlice = createSlice({
@@ -45,6 +47,25 @@ export const userSlice = createSlice({
     userSetProviderId: (state, action: PayloadAction<string>) => {
       state.providerId = action.payload;
     },
+    userSetCreatedAt: (state, action: PayloadAction<string>) => {
+      state.createdAt = action.payload;
+    },
+    userSetLastLoginAt: (state, action: PayloadAction<string>) => {
+      state.lastLoginAt = action.payload;
+    },
+    userAuthSet: (state, action: PayloadAction<UserTypes>) => {
+      state.user = action.payload.user;
+      state.dob = action.payload.dob;
+      state.gender = action.payload.gender;
+      state.phone = action.payload.phone;
+      state.email = action.payload.email;
+      state.isEmailVerified = action.payload.isEmailVerified;
+      state.photoURL = action.payload.photoURL;
+      state.uid = action.payload.uid;
+      state.providerId = action.payload.providerId;
+      state.createdAt = action.payload.createdAt;
+      state.lastLoginAt = action.payload.lastLoginAt;
+    },
   },
 });
 
@@ -58,5 +79,8 @@ export const {
   userSetPhotoURL,
   userSetUID,
   userSetProviderId,
+  userSetCreatedAt,
+  userSetLastLoginAt,
+  userAuthSet,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -3,9 +3,12 @@ import React from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "@/lib/firebase/firebaseAuth";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sessionSetAuthMode } from "@/controllers/slices/sessionSlice";
 import { usePathname } from "@/i18n/navigation";
+import { RootState } from "@/types/stateTypes";
+import useUserDispatch from "./useUserDispatch";
+import splitDisplayName from "@/utils/splitDisplayName";
 
 export function useUserManagement() {
   const [authUser, setAuthUser] = React.useState<User | null>(null);
@@ -14,17 +17,49 @@ export function useUserManagement() {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const createAt = useSelector((state: RootState) => state.user.createdAt);
+  const lastLoginAt = useSelector((state: RootState) => state.user.lastLoginAt);
+  const dateofbirth = useSelector((state: RootState) => state.user.dob);
+  const phoneNumber = useSelector((state: RootState) => state.user.phone);
+  const photoLink = useSelector((state: RootState) => state.user.photoURL);
+  const { userAuthenticate } = useUserDispatch();
 
   // Track auth state
   React.useEffect(() => {
     let isMounted = true;
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!isMounted) return;
 
-      if (currentUser) {
+      if (user) {
         dispatch(sessionSetAuthMode(true));
-        setAuthUser(currentUser);
+        setAuthUser(user);
+        const { first_name, last_name } = splitDisplayName(
+          user.displayName || ""
+        );
+        const gender = "Female";
+        const dob = dateofbirth || "";
+        const phone = phoneNumber || user.phoneNumber || "";
+        const email = user.email || "";
+        const providerId = user.providerData[0]?.providerId || "";
+        const isEmailVerified = user.emailVerified;
+        const photoURL = photoLink || user.photoURL || "";
+        const uid = user.uid || "";
+        const createdAt = user.metadata.creationTime || "";
+        const lastLoginAt = user.metadata.lastSignInTime || "";
+        userAuthenticate({
+          user: { first_name, last_name },
+          gender,
+          dob,
+          phone,
+          email,
+          isEmailVerified,
+          photoURL,
+          uid,
+          providerId,
+          createdAt,
+          lastLoginAt,
+        });
       } else {
         setAuthUser(null);
       }
@@ -55,9 +90,17 @@ export function useUserManagement() {
   // Manual redirect after login
   const redirectAfterLogin = () => {
     if (authUser && !isLoading) {
-      const redirectUrl = getRedirectUrl();
+      const callbackUrl = searchParams.get("callbackUrl") || "";
+      const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-      router.push(redirectUrl);
+      if (createAt === lastLoginAt) {
+        // First-time login, go to wizard with callback
+        router.push(`/wizard?callbackUrl=${encodedCallbackUrl}`);
+      } else {
+        // Regular login, redirect to callback or dashboard
+        const redirectUrl = getRedirectUrl();
+        router.push(redirectUrl);
+      }
     }
   };
 

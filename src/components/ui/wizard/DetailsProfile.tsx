@@ -17,13 +17,17 @@ import EditLanguageAction from "../profile/EditLanguageAction";
 import AccountAction from "../profile/AccountAction";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/stateTypes";
+import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 const steps = ["Basic", "Location", "Contact"];
 
 export default function StepperExample() {
   const [step, setStep] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
-
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
   // Redux state
   const firstName = useSelector(
     (state: RootState) => state.user.user.first_name
@@ -66,13 +70,25 @@ export default function StepperExample() {
         return <div>Unknown step</div>;
     }
   };
+  const getLocale = (): string => {
+    const match = pathname.match(/^\/([a-z]{2})(\/|$)/);
+    return match?.[1] || "en-in";
+  };
+
+  const getRedirectUrl = (): string => {
+    const callbackUrl = searchParams.get("callbackUrl");
+    return callbackUrl
+      ? decodeURIComponent(callbackUrl)
+      : `/${getLocale()}/dashboard`;
+  };
 
   const handleNext = () => {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
       // Final action on Finish
-      alert("All steps completed!");
+      const redirectUrl = getRedirectUrl();
+      router.push(redirectUrl);
     }
   };
 

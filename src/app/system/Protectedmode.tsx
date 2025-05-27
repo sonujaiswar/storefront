@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useUserManagement } from "@/hooks/useUserManagement";
 import { useRouter, usePathname } from "next/navigation";
 import AccessDenied from "@/components/ui/AccessDenied/Action";
-import { RootState } from "@/types/stateTypes";
 
 export default function ProtectedMode({
   children,

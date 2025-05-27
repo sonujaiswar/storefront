@@ -10,15 +10,7 @@ import useUserDispatch from "./useUserDispatch";
 
 export function useSocialSignIn() {
   const [error, setError] = useState<string | null>(null);
-  const {
-    setFullName,
-    setEmail,
-    setPhotoURL,
-    setProviderId,
-    setUID,
-    setEmailVerified,
-    setPhone,
-  } = useUserDispatch();
+  const { userAuthenticate } = useUserDispatch();
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -26,16 +18,30 @@ export function useSocialSignIn() {
       const { first_name, last_name } = splitDisplayName(
         user.displayName || ""
       );
+      const gender = "Female";
+      const dob = "";
+      const phone = user.phoneNumber || "";
       const email = user.email || "";
       const providerId = user.providerData[0]?.providerId || "";
+      const isEmailVerified = user.emailVerified;
+      const photoURL = user.photoURL || "";
+      const uid = user.uid || "";
+      const createdAt = user.metadata.creationTime || "";
+      const lastLoginAt = user.metadata.lastSignInTime || "";
 
-      setFullName({ first_name, last_name });
-      setEmail(email);
-      setPhotoURL(user.photoURL || "");
-      setProviderId(providerId);
-      setUID(user.uid);
-      setEmailVerified(user.emailVerified);
-      setPhone(user.phoneNumber || "");
+      userAuthenticate({
+        user: { first_name, last_name },
+        gender,
+        dob,
+        phone,
+        email,
+        isEmailVerified,
+        photoURL,
+        uid,
+        providerId,
+        createdAt,
+        lastLoginAt,
+      });
     } catch (error) {
       setError((error as Error).message);
     }

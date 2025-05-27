@@ -13,4 +13,6 @@ export interface UserTypes {
   photoURL: string | null;
   uid: string | null;
   providerId: string | null;
+  createdAt: string | null;
+  lastLoginAt: string | null;
 }
