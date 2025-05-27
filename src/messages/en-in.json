@@ -82,8 +82,8 @@
     "description": "Please enter your details to create an account with us for faster checkout and order tracking.",
     "buttonText": "Create account",
     "buttonTextSignIn": "Already have an account? Sign In",
-    "formFirstName": "Full name",
-    "formLastName": "Last name",
+    "formfullname": "Full name",
+
     "formEmail": "Email",
     "formPassword": "Password",
     "formConfirmPassword": "Confirm Password"

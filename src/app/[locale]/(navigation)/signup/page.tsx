@@ -15,15 +15,22 @@ import Link from "next/link";
 import { FormInputField } from "@/components/ui/security/Action";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
+import { useDispatch } from "react-redux";
+import splitDisplayName from "@/utils/splitDisplayName";
+import { userSetFullName } from "@/controllers/slices/userSlice";
 export default function signUpPage() {
   const t = useTranslations("signupPage");
   const { signUpWithEmail, error } = useEmailPassword();
-  const [firstname, setFirstName] = React.useState<string>("");
-  const [lastname, setLastName] = React.useState<string>("");
+  const [fullname, setfullname] = React.useState<string>("");
+
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const dispatch = useDispatch();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { first_name, last_name } = splitDisplayName(fullname);
+    dispatch(userSetFullName({ first_name, last_name }));
     signUpWithEmail(email, password);
   };
   const [isOpen, setIsOpen] = React.useState<boolean>(true);
@@ -54,11 +61,11 @@ export default function signUpPage() {
           sx={{ gap: 2, display: "flex", flexDirection: "column" }}
         >
           <TextField
-            label={t("formFirstName")}
-            name="Firstname"
+            label={t("formfullname")}
+            name="fullname"
             fullWidth
-            value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={fullname}
+            onChange={(e) => setfullname(e.target.value)}
             slotProps={{
               input: {
                 startAdornment: (
