@@ -11,6 +11,7 @@ import { NavigationRoutes } from "@/constants/NavigationRoutes";
 import { useTranslations } from "next-intl";
 import SignedInMenu from "./SignedInMenu";
 import { cartToggleItem } from "@/controllers/slices/cartSlice";
+import { useSmartSignInLink } from "@/hooks/useSmartSignInLink";
 
 export default function Action() {
   const isAuth = useSelector(
@@ -18,6 +19,7 @@ export default function Action() {
   );
   const t = useTranslations("HeaderButton");
   const dispatch = useDispatch();
+  const SignInUrl = useSmartSignInLink();
   return (
     <>
       <Button LinkComponent={Link} href={NavigationRoutes.dashboardPage.url}>
@@ -42,7 +44,7 @@ export default function Action() {
         <Button
           variant="contained"
           LinkComponent={Link}
-          href={NavigationRoutes.signinPage.url}
+          href={SignInUrl}
           startIcon={NavigationRoutes.signinPage.icon}
         >
           {t("login")}

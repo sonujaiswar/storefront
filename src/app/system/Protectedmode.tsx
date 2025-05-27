@@ -4,25 +4,33 @@ import { sessionSetProtectedMode } from "@/controllers/slices/sessionSlice";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useUserManagement } from "@/hooks/useUserManagement";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function ProtectedMode({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const { isAuthenticated, isLoading: checkingAuth } = useUserManagement();
   const dispatch = useDispatch();
+  const router = useRouter();
+  const pathname = usePathname(); // get current path
 
   useEffect(() => {
     dispatch(sessionSetProtectedMode(true));
   }, [dispatch]);
 
-  // Optional loading indicator
+  useEffect(() => {
+    if (!checkingAuth && !isAuthenticated) {
+      const encodedPath = encodeURIComponent(pathname);
+      router.push(`/signin?callbackUrl=${encodedPath}`);
+    }
+  }, [checkingAuth, isAuthenticated, pathname, router]);
+
   if (checkingAuth) {
     return <div>Checking authentication...</div>;
   }
 
-  // Block access if not authenticated
   if (!isAuthenticated) {
-    return <div>Access denied. Redirecting...</div>; // or null
+    return <div>Access denied. Redirecting...</div>;
   }
 
   return <>{children}</>;

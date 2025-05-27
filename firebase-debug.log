@@ -1,28 +1,28 @@
-[debug] [2025-05-27T01:16:55.938Z] ----------------------------------------------------------------------
-[debug] [2025-05-27T01:16:55.940Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Sonuj\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2025-05-27T01:16:55.940Z] CLI Version:   14.4.0
-[debug] [2025-05-27T01:16:55.940Z] Platform:      win32
-[debug] [2025-05-27T01:16:55.940Z] Node Version:  v22.11.0
-[debug] [2025-05-27T01:16:55.940Z] Time:          Tue May 27 2025 06:46:55 GMT+0530 (India Standard Time)
-[debug] [2025-05-27T01:16:55.941Z] ----------------------------------------------------------------------
+[debug] [2025-05-27T06:10:32.579Z] ----------------------------------------------------------------------
+[debug] [2025-05-27T06:10:32.580Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Sonuj\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2025-05-27T06:10:32.581Z] CLI Version:   14.4.0
+[debug] [2025-05-27T06:10:32.581Z] Platform:      win32
+[debug] [2025-05-27T06:10:32.581Z] Node Version:  v22.11.0
+[debug] [2025-05-27T06:10:32.581Z] Time:          Tue May 27 2025 11:40:32 GMT+0530 (India Standard Time)
+[debug] [2025-05-27T06:10:32.581Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2025-05-27T01:16:56.153Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2025-05-27T01:16:56.154Z] > authorizing via signed-in user (viveksjaiswar@gmail.com)
-[debug] [2025-05-27T01:16:56.360Z] java version "23.0.1" 2024-10-15
+[debug] [2025-05-27T06:10:32.767Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-27T06:10:32.768Z] > authorizing via signed-in user (viveksjaiswar@gmail.com)
+[debug] [2025-05-27T06:10:32.972Z] java version "23.0.1" 2024-10-15
+Java(TM) SE Runtime Environment (build 23.0.1+11-39)
 
-[debug] [2025-05-27T01:16:56.361Z] Java(TM) SE Runtime Environment (build 23.0.1+11-39)
-Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
+[debug] [2025-05-27T06:10:32.972Z] Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
 
-[debug] [2025-05-27T01:16:56.394Z] Parsed Java major version: 23
+[debug] [2025-05-27T06:10:32.984Z] Parsed Java major version: 23
 [info] i  emulators: Starting emulators: auth, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, storage"}}
-[debug] [2025-05-27T01:16:56.411Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2025-05-27T01:16:56.411Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2025-05-27T01:16:56.411Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2025-05-27T01:16:56.411Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":8080},{"address":"::1","family":"IPv6","port":8080}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2025-05-27T01:16:56.415Z] [hub] writing locator at C:\Users\Sonuj\AppData\Local\Temp\hub-attirebellademoapp.json
-[debug] [2025-05-27T01:17:00.616Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2025-05-27T01:17:01.268Z] Temp file directory for storage emulator: C:\Users\Sonuj\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\Sonuj\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2025-05-27T01:17:01.278Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[debug] [2025-05-27T06:10:32.994Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-05-27T06:10:32.994Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-05-27T06:10:32.994Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-05-27T06:10:32.994Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":8080},{"address":"::1","family":"IPv6","port":8080}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-05-27T06:10:32.998Z] [hub] writing locator at C:\Users\Sonuj\AppData\Local\Temp\hub-attirebellademoapp.json
+[debug] [2025-05-27T06:10:36.980Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-05-27T06:10:37.609Z] Temp file directory for storage emulator: C:\Users\Sonuj\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\Sonuj\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2025-05-27T06:10:37.620Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
 │ ✔  All emulators ready! It is now safe to connect your app. │
