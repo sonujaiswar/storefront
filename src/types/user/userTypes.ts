@@ -1,18 +1,22 @@
-export interface UserBasicTypes {
-  first_name: string;
-  last_name: string;
-}
-
 export interface UserTypes {
-  user: UserBasicTypes;
+  firstname: string | null;
+  lastname: string | null;
   gender: string | null;
   dob: string | null;
   phone: string | null;
   email: string | null;
-  isEmailVerified: boolean;
-  photoURL: string | null;
+  isemailverified: boolean;
+  photourl: string | null;
   uid: string | null;
-  providerId: string | null;
-  createdAt: string | null;
-  lastLoginAt: string | null;
+  providerid: string | null;
+  password: string | null;
+  language: string | null;
+  currency: string | null;
+  timezone: string | null;
+  country: string | null;
+  subdivision: string | null;
+  city: string | null;
+  postalcode: string | null;
+  createdat: string | null;
+  lastloginat: string | null;
 }

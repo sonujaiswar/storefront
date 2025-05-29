@@ -1,86 +1,57 @@
-import { UserBasicTypes, UserTypes } from "@/types/user/userTypes";
+import { UserTypes } from "@/types/user/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { use } from "react";
 
 const initialState: UserTypes = {
-  user: { first_name: "", last_name: "" },
-  dob: "",
+  firstname: "",
+  lastname: "",
   gender: "",
+  dob: "",
   phone: "",
   email: "",
-  isEmailVerified: false,
-  photoURL: "",
+  isemailverified: false,
+  photourl: "",
   uid: "",
-  providerId: "",
-  createdAt: "",
-  lastLoginAt: "",
+  providerid: "",
+  password: "",
+  language: "",
+  currency: "",
+  timezone: "",
+  country: "",
+  subdivision: "",
+  city: "",
+  postalcode: "",
+  createdat: "",
+  lastloginat: "",
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userSetFullName: (state, action: PayloadAction<UserBasicTypes>) => {
-      state.user = action.payload;
-    },
-    userSetDOB: (state, action: PayloadAction<string>) => {
-      state.dob = action.payload;
-    },
-    userSetGender: (state, action: PayloadAction<string>) => {
-      state.gender = action.payload;
-    },
-    userSetPhone: (state, action: PayloadAction<string>) => {
-      state.phone = action.payload;
-    },
-    userSetEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
-    },
-    userSetEmailVerified: (state, action: PayloadAction<boolean>) => {
-      state.isEmailVerified = action.payload;
-    },
-    userSetPhotoURL: (state, action: PayloadAction<string>) => {
-      state.photoURL = action.payload;
-    },
-    userSetUID: (state, action: PayloadAction<string>) => {
-      state.uid = action.payload;
-    },
-    userSetProviderId: (state, action: PayloadAction<string>) => {
-      state.providerId = action.payload;
-    },
-    userSetCreatedAt: (state, action: PayloadAction<string>) => {
-      state.createdAt = action.payload;
-    },
-    userSetLastLoginAt: (state, action: PayloadAction<string>) => {
-      state.lastLoginAt = action.payload;
-    },
     userAuthSet: (state, action: PayloadAction<UserTypes>) => {
-      state.user = action.payload.user;
+      state.firstname = action.payload.firstname;
+      state.lastname = action.payload.lastname;
       state.dob = action.payload.dob;
       state.gender = action.payload.gender;
       state.phone = action.payload.phone;
       state.email = action.payload.email;
-      state.isEmailVerified = action.payload.isEmailVerified;
-      state.photoURL = action.payload.photoURL;
+      state.isemailverified = action.payload.isemailverified;
+      state.photourl = action.payload.photourl;
+      state.providerid = action.payload.providerid;
+      state.password = action.payload.password;
+      state.language = action.payload.language;
+      state.currency = action.payload.currency;
+      state.timezone = action.payload.timezone;
+      state.country = action.payload.country;
+      state.subdivision = action.payload.subdivision;
+      state.city = action.payload.city;
+      state.postalcode = action.payload.postalcode;
+      state.createdat = action.payload.createdat;
+      state.lastloginat = action.payload.lastloginat;
       state.uid = action.payload.uid;
-      state.providerId = action.payload.providerId;
-      state.createdAt = action.payload.createdAt;
-      state.lastLoginAt = action.payload.lastLoginAt;
     },
   },
 });
 
-export const {
-  userSetFullName,
-  userSetDOB,
-  userSetGender,
-  userSetPhone,
-  userSetEmail,
-  userSetEmailVerified,
-  userSetPhotoURL,
-  userSetUID,
-  userSetProviderId,
-  userSetCreatedAt,
-  userSetLastLoginAt,
-  userAuthSet,
-} = userSlice.actions;
+export const { userAuthSet } = userSlice.actions;
 export default userSlice.reducer;
