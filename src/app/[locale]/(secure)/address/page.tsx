@@ -15,10 +15,7 @@ import Address from "@/components/ui/address/Address";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 import { dialogToggle } from "@/controllers/slices/dialogSlice";
-import {
-  addressResetForm,
-  addressSetEditing,
-} from "@/controllers/slices/addressSlice";
+import { addressSetEditing } from "@/controllers/slices/addressSlice";
 
 export default function CustomerAddressUI() {
   const t = useTranslations("addressPage");
@@ -40,7 +37,6 @@ export default function CustomerAddressUI() {
                 onClick={() => {
                   dispatch(dialogToggle());
                   dispatch(addressSetEditing(false));
-                  dispatch(addressResetForm());
                 }}
               >
                 <CardContent

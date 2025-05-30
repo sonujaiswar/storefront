@@ -1,4 +1,5 @@
 export interface UserTypes {
+  userid?: string;
   firstname: string | null;
   lastname: string | null;
   gender: string | null;

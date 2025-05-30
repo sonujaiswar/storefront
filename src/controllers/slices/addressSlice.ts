@@ -10,15 +10,16 @@ export interface AddressState {
 const initialState: AddressState = {
   addresses: [],
   addressForm: {
-    full_name: "",
+    fullname: "",
     phone: "",
-    addressLine1: "",
-    addressLine2: "",
+    addressline1: "",
+    addressline2: "",
     city: "",
-    state: "",
-    postalCode: "",
+    province: "",
+    postalcode: "",
     landmark: "",
     country: "",
+    isprimary: false,
   },
   isEditing: false,
 };
@@ -32,7 +33,7 @@ export const addressSlice = createSlice({
     },
     addressSetSave: (state, action: PayloadAction<AddressTypes>) => {
       const index = state.addresses.findIndex(
-        (address) => address.address_id === action.payload.address_id
+        (address) => address.addressid === action.payload.addressid
       );
 
       if (index !== -1) {
@@ -43,23 +44,17 @@ export const addressSlice = createSlice({
         state.addresses.push(action.payload);
       }
     },
-    addressSetFormField: (
-      state,
-      action: PayloadAction<{ field: keyof AddressTypesUI; value: string }>
-    ) => {
-      state.addressForm[action.payload.field] = action.payload.value;
-    },
 
-    addressResetForm: (state) => {
-      state.addressForm = initialState.addressForm;
-    },
     addressSetDelete: (state, action: PayloadAction<string>) => {
       state.addresses = state.addresses.filter(
-        (address) => address.address_id !== action.payload
+        (address) => address.addressid !== action.payload
       );
     },
     addressSetEditing: (state, action: PayloadAction<boolean>) => {
       state.isEditing = action.payload;
+    },
+    addressSetAll: (state, action: PayloadAction<AddressTypes[]>) => {
+      state.addresses = action.payload;
     },
   },
 });
@@ -69,7 +64,6 @@ export const {
   addressSetForm,
   addressSetDelete,
   addressSetSave,
-  addressResetForm,
-  addressSetFormField,
+  addressSetAll,
 } = addressSlice.actions;
 export default addressSlice.reducer;

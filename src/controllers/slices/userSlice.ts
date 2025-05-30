@@ -2,6 +2,7 @@ import { UserTypes } from "@/types/user/userTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: UserTypes = {
+  userid: "",
   firstname: "",
   lastname: "",
   gender: "",
@@ -37,6 +38,7 @@ export const userSlice = createSlice({
     },
 
     userAuthSet: (state, action: PayloadAction<UserTypes>) => {
+      state.userid = action.payload.userid;
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
       state.dob = action.payload.dob;

@@ -27,7 +27,7 @@ const useUserDispatch = () => {
 
     if (existingUser) {
       // Step 2: User found, dispatch existing data
-      console.log(existingUser);
+      console.log(`Existing user found:`, existingUser);
       dispatch(userAuthSet(existingUser));
       dispatch(
         setLocationSave({

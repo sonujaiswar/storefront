@@ -1,15 +1,16 @@
 export interface AddressTypesUI {
-  full_name: string;
+  fullname: string;
   phone: string;
-  addressLine1: string;
-  addressLine2: string;
+  addressline1: string;
+  addressline2: string;
   city: string;
-  state: string;
-  postalCode: string;
+  province: string;
+  postalcode: string;
   landmark: string;
   country: string;
+  isprimary?: boolean;
 }
 
 export interface AddressTypes extends AddressTypesUI {
-  address_id: string;
+  addressid: string;
 }

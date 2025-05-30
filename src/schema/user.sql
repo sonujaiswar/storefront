@@ -25,17 +25,22 @@ CREATE TABLE users (
     last_login_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP
 );
+
 CREATE TABLE user_addresses (
-    address_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    address_type VARCHAR(50) NOT NULL, -- 'shipping', 'billing', etc.
-    address_line1 VARCHAR(255) NOT NULL,
-    address_line2 VARCHAR(255),
+    addressid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    userid UUID NOT NULL REFERENCES users(userid) ON DELETE CASCADE,
+    fullname VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    addresstype VARCHAR(50) NOT NULL DEFAULT 'shipping', -- 'shipping', 'billing', etc.
+    addressline1 VARCHAR(255) NOT NULL,
+    addressline2 VARCHAR(255),
     city VARCHAR(100) NOT NULL,
-    state VARCHAR(100) NOT NULL,
-    postal_code VARCHAR(20) NOT NULL,
+    province VARCHAR(100),
+    postalcode VARCHAR(20) NOT NULL,
     country VARCHAR(100) NOT NULL,
-    is_primary BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    landmark VARCHAR(255),
+    
+    isprimary BOOLEAN DEFAULT FALSE,
+    createdat TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updatedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
