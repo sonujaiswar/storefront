@@ -1,36 +1,49 @@
 "use client";
 
 import { sessionSetProtectedMode } from "@/controllers/slices/sessionSlice";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useUserManagement } from "@/hooks/useUserManagement";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter, usePathname } from "next/navigation";
 import AccessDenied from "@/components/ui/AccessDenied/Action";
+import { auth } from "@/lib/firebase/firebaseAuth";
 
 export default function ProtectedMode({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { isAuthenticated, isLoading: checkingAuth } = useUserManagement();
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const pathname = usePathname(); // get current path
+  const pathname = usePathname();
 
   useEffect(() => {
-    dispatch(sessionSetProtectedMode(true));
-  }, [dispatch]);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
-    if (!checkingAuth && !isAuthenticated) {
-      const encodedPath = encodeURIComponent(pathname);
-      router.push(`/signin?callbackUrl=${encodedPath}`);
+    if (authenticated) dispatch(sessionSetProtectedMode(true));
+  }, [dispatch, authenticated]);
+
+  // ✅ Redirect in effect (safe)
+  useEffect(() => {
+    if (!loading && !authenticated) {
+      router.replace(`/signin?callbackUrl=${encodeURIComponent(pathname)}`);
     }
-  }, [checkingAuth, isAuthenticated, pathname, router]);
-  if (!checkingAuth && !isAuthenticated) {
+  }, [loading, authenticated, router, pathname]);
+
+  if (!loading && !authenticated) {
     return <AccessDenied />;
   }
-  // if (checkingAuth) {
-  //   return <div>Checking authentication...</div>;
-  // }
 
   return <>{children}</>;
 }

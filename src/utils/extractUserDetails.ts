@@ -4,30 +4,54 @@ import splitDisplayName from "./splitDisplayName";
 export function extractUserDetails(
   user: User,
   fallbackData?: {
-    first_name?: string;
-    last_name?: string;
-    photoURL?: string;
-    dob?: string;
-    phone?: string;
+    firstname: string | null;
+    lastname: string | null;
+    gender: string | null;
+    dob: string | null;
+    phone: string | null;
+    email: string | null;
+    isemailverified: boolean;
+    photourl: string | null;
+    uid: string | null;
+    providerid: string | null;
+    password: string | null;
+    language: string | null;
+    currency: string | null;
+    timezone: string | null;
+    country: string | null;
+    subdivision: string | null;
+    city: string | null;
+    postalcode: string | null;
+    createdat: string | null;
+    lastloginat: string | null;
   }
 ) {
-  const { first_name, last_name } = splitDisplayName(
-    fallbackData?.first_name && fallbackData?.last_name
-      ? `${fallbackData.first_name} ${fallbackData.last_name}`
+  const { firstname, lastname } = splitDisplayName(
+    fallbackData?.firstname && fallbackData?.lastname
+      ? `${fallbackData.firstname} ${fallbackData.lastname}`
       : user.displayName || ""
   );
 
   return {
-    user: { first_name, last_name },
-    gender: "Female",
+    firstname,
+    lastname,
+    gender: fallbackData?.gender || null,
     dob: fallbackData?.dob || null,
     phone: fallbackData?.phone || user.phoneNumber || "",
     email: user.email || "",
-    isEmailVerified: user.emailVerified,
-    photoURL: fallbackData?.photoURL || user.photoURL || "",
+    isemailverified: user.emailVerified || false,
+    photourl: fallbackData?.photourl || user.photoURL || "",
     uid: user.uid,
-    providerId: user.providerData[0]?.providerId || "",
-    createdAt: user.metadata.creationTime || "",
-    lastLoginAt: user.metadata.lastSignInTime || "",
+    providerid: user.providerData[0]?.providerId || "",
+    password: fallbackData?.password || null,
+    language: fallbackData?.language || null,
+    currency: fallbackData?.currency || null,
+    timezone: fallbackData?.timezone || null,
+    country: fallbackData?.country || null,
+    subdivision: fallbackData?.subdivision || null,
+    city: fallbackData?.city || null,
+    postalcode: fallbackData?.postalcode || null,
+    createdat: user.metadata.creationTime || "",
+    lastloginat: user.metadata.lastSignInTime || "",
   };
 }

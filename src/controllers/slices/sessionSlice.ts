@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface SessionState {
   isProtectedMode: boolean;
   isAuthenticated: boolean;
+  isNewUser: boolean;
 }
 
 const sessionState: SessionState = {
   isProtectedMode: false,
   isAuthenticated: false,
+  isNewUser: false,
 };
 
 export const sessionSlice = createSlice({
@@ -23,6 +25,9 @@ export const sessionSlice = createSlice({
     sessionSetAuthMode: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
+    sessionSetNewUser: (state, action: PayloadAction<boolean>) => {
+      state.isNewUser = action.payload;
+    },
     sessionReset: () => sessionState,
   },
 });
@@ -32,5 +37,6 @@ export const {
   sessionSetProtectedMode,
   sessionSetAuthMode,
   sessionReset,
+  sessionSetNewUser,
 } = sessionSlice.actions;
 export default sessionSlice.reducer;

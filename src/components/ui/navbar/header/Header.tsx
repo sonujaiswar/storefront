@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -14,9 +14,20 @@ import { RootState } from "@/types/stateTypes";
 import Action from "./Action";
 
 import Button from "@mui/material/Button";
-import { sessionToggleMode } from "@/controllers/slices/sessionSlice";
+import {
+  sessionSetAuthMode,
+  sessionToggleMode,
+} from "@/controllers/slices/sessionSlice";
+import { useUserAuth } from "@/hooks/useUserAuth";
+
 export default function Header() {
   const dispatch = useDispatch();
+  const { isLoading, user } = useUserAuth();
+  React.useEffect(() => {
+    if (user && !isLoading) {
+      dispatch(sessionSetAuthMode(true));
+    }
+  }, [isLoading, user]);
   const isDrawerActive = useSelector(
     (state: RootState) => state.settings.isDrawerOpen
   );

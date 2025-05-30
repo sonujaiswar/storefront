@@ -5,7 +5,7 @@ const initialState: UserTypes = {
   firstname: "",
   lastname: "",
   gender: "",
-  dob: "",
+  dob: null,
   phone: "",
   email: "",
   isemailverified: false,
@@ -28,6 +28,14 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    userSetFullName: (
+      state,
+      action: PayloadAction<{ firstname: string; lastname: string }>
+    ) => {
+      state.firstname = action.payload.firstname;
+      state.lastname = action.payload.lastname;
+    },
+
     userAuthSet: (state, action: PayloadAction<UserTypes>) => {
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
@@ -50,8 +58,23 @@ export const userSlice = createSlice({
       state.lastloginat = action.payload.lastloginat;
       state.uid = action.payload.uid;
     },
+    userSetPhone: (state, action: PayloadAction<string>) => {
+      state.phone = action.payload;
+    },
+    userSetDOB: (state, action: PayloadAction<string>) => {
+      state.dob = action.payload;
+    },
+    userSetGender: (state, action: PayloadAction<string>) => {
+      state.gender = action.payload;
+    },
   },
 });
 
-export const { userAuthSet } = userSlice.actions;
+export const {
+  userAuthSet,
+  userSetFullName,
+  userSetPhone,
+  userSetDOB,
+  userSetGender,
+} = userSlice.actions;
 export default userSlice.reducer;

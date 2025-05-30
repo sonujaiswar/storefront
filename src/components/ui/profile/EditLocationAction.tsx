@@ -42,6 +42,18 @@ export default function EditLocationAction() {
   const isProvinceAvailable = selectedCountry?.subdivisions?.length! > 0;
   const [touched, setTouched] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    setSelectedCountry(
+      countriesAndSubdivisions.find((c) => c.countryCode === countryCode) ||
+        null
+    );
+    setSelectedProvince(
+      countriesAndSubdivisions
+        .find((c) => c.countryCode === countryCode)
+        ?.subdivisions.find((s) => s.code === provinceCode) || null
+    );
+  }, [countryCode, provinceCode]);
+
   function handleSave(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     dispatch(

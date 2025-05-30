@@ -11,19 +11,17 @@ import { RootState } from "@/types/stateTypes";
 export default function EditNameAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
-  const firstName = useSelector(
-    (state: RootState) => state.user.user.first_name
-  );
-  const lastName = useSelector((state: RootState) => state.user.user.last_name);
+  const firstName = useSelector((state: RootState) => state.user.firstname!);
+  const lastName = useSelector((state: RootState) => state.user.lastname!);
 
-  const [first_name, setFirstName] = React.useState<string>(firstName);
-  const [last_name, setlastName] = React.useState<string>(lastName);
+  const [firstname, setFirstName] = React.useState<string>(firstName);
+  const [lastname, setlastName] = React.useState<string>(lastName);
   const [touched, setTouched] = React.useState<boolean>(false);
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userSetFullName({ first_name, last_name }));
-    setFirstName("");
-    setlastName("");
+    dispatch(userSetFullName({ firstname, lastname }));
+    // setFirstName("");
+    // setlastName("");
     dispatch(dialogReset());
   };
 
@@ -39,13 +37,13 @@ export default function EditNameAction() {
                 fullWidth
                 required
                 onBlur={() => setTouched(true)}
-                error={touched && !first_name}
+                error={touched && !firstname}
                 helperText={
-                  touched && !first_name
+                  touched && !firstname
                     ? t("basicFormEditFirstNameTextFieldHelperText")
                     : ""
                 }
-                value={first_name}
+                value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
                 margin="normal"
               />
@@ -54,7 +52,7 @@ export default function EditNameAction() {
               <TextField
                 name="lastName"
                 label={t("basicFormLastName")}
-                value={last_name}
+                value={lastname}
                 onChange={(e) => setlastName(e.target.value)}
                 fullWidth
                 margin="normal"

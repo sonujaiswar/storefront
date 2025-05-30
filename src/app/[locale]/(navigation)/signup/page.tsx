@@ -29,8 +29,8 @@ export default function signUpPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { first_name, last_name } = splitDisplayName(fullname);
-    dispatch(userSetFullName({ first_name, last_name }));
+    const { firstname, lastname } = splitDisplayName(fullname);
+    dispatch(userSetFullName({ firstname, lastname }));
     signUpWithEmail(email, password);
   };
   const [isOpen, setIsOpen] = React.useState<boolean>(true);

@@ -29,9 +29,7 @@ export default function StepperExample() {
   const pathname = usePathname();
   const router = useRouter();
   // Redux state
-  const firstName = useSelector(
-    (state: RootState) => state.user.user.first_name
-  );
+  const firstName = useSelector((state: RootState) => state.user.firstname);
   const dateofbirth = useSelector((state: RootState) => state.user.dob);
   const gender = useSelector((state: RootState) => state.user.gender);
   const countryCode = useSelector(
@@ -43,15 +41,15 @@ export default function StepperExample() {
   useEffect(() => {
     if (step === 0) {
       const valid =
-        firstName.trim().length > 0 &&
+        (firstName?.trim().length ?? 0) > 0 &&
         dateofbirth !== null &&
-        gender!.trim().length > 0;
+        (gender?.trim().length ?? 0) > 0;
       setIsDisabled(!valid);
     } else if (step === 1) {
-      const valid = countryCode!.trim().length > 0;
+      const valid = (countryCode?.trim().length ?? 0) > 0;
       setIsDisabled(!valid);
     } else if (step === 2) {
-      const valid = phoneNumber!.trim().length > 0;
+      const valid = (phoneNumber?.trim().length ?? 0) > 0;
       setIsDisabled(!valid);
     } else {
       setIsDisabled(false);

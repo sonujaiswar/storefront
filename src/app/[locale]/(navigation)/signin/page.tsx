@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -11,16 +11,19 @@ import { useTranslations } from "next-intl";
 import LoginWithEmail from "@/components/ui/signin/LoginWithEmail";
 import LoginWithSocial from "@/components/ui/signin/LoginWithSocial";
 import SocialIcon from "@/components/ui/signin/SocialIcon";
-import { useUserManagement } from "@/hooks/useUserManagement";
+import { useUserAuth } from "@/hooks/useUserAuth";
+import useRedirectAfterLogin from "@/hooks/useRedirectAfterLogin";
 export default function SignInPage() {
   const [useEmail, setUseEmail] = useState(false);
 
   const t = useTranslations("signinPage");
-  const { redirectAfterLogin } = useUserManagement();
+  const { isLoading, user } = useUserAuth();
+  const { redirect } = useRedirectAfterLogin();
   React.useEffect(() => {
-    redirectAfterLogin();
-  }, [redirectAfterLogin]);
-
+    if (user && !isLoading) {
+      redirect();
+    }
+  });
   return (
     <Container maxWidth="sm" sx={{ py: 8, textAlign: "center" }}>
       <Typography variant="h4" sx={{ fontFamily: "Playfair Display", mb: 1 }}>

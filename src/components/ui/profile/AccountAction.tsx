@@ -30,7 +30,7 @@ export default function AccountAction() {
 
   const email = useSelector((state: RootState) => state.user.email);
   const isEmailVerified = useSelector(
-    (state: RootState) => state.user.isEmailVerified
+    (state: RootState) => state.user.isemailverified
   );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;

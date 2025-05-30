@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BProgress } from "@bprogress/core";
+import SessionMode from "./SessionMode";
 
 export default function StateUI({
   children,
@@ -73,7 +74,7 @@ export default function StateUI({
       >
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {children}
+            <SessionMode>{children}</SessionMode>
           </PersistGate>
         </Provider>
       </ProgressProvider>

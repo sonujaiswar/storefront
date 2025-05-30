@@ -20,8 +20,8 @@ export default function ProfileRow({
   onEdit,
   editLabel = "Edit",
   tooltip,
-  labelSize = 3,
-  valueSize = 5,
+  labelSize = 4,
+  valueSize = 4,
   actionSize = 4,
   isVerified = false,
 }: ProfileRowProps) {
@@ -29,12 +29,20 @@ export default function ProfileRow({
     <Grid
       container
       spacing={2}
-      sx={{ display: "flex", alignItems: "center", my: 1 }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "start",
+        my: 1,
+      }}
     >
       <Grid size={labelSize}>
         <Typography
           color="text.secondary"
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
         >
           {label}
           {tooltip && (

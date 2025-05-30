@@ -26,9 +26,7 @@ export default function Mainmenu() {
   }, [pathname]);
 
   const stripedPathname = useSelector((state: RootState) => state.utils.path);
-  const firstName = useSelector(
-    (state: RootState) => state.user.user.first_name
-  );
+  const firstName = useSelector((state: RootState) => state.user.firstname);
   return (
     <List>
       <ListSubheader

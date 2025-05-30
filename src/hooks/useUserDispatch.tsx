@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import { userAuthSet } from "@/controllers/slices/userSlice";
 import { UserTypes } from "@/types/user/userTypes";
 import { supabase } from "@/lib/supabase/supabase";
+import { setLocationSave } from "@/controllers/slices/locationSlice";
+import { sessionSetNewUser } from "@/controllers/slices/sessionSlice";
 
 const useUserDispatch = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,14 @@ const useUserDispatch = () => {
       // Step 2: User found, dispatch existing data
       console.log(existingUser);
       dispatch(userAuthSet(existingUser));
+      dispatch(
+        setLocationSave({
+          area: {
+            countryCode: existingUser.country,
+            provinceCode: existingUser.subdivision,
+          },
+        })
+      );
       console.log("User already exists, loaded from DB.");
     } else {
       // Step 3: User not found, perform upsert
@@ -41,8 +51,9 @@ const useUserDispatch = () => {
         return;
       }
       console.log(upsertedData);
+      dispatch(sessionSetNewUser(true));
       dispatch(userAuthSet(upsertedData));
-      console.log("User inserted and loaded from DB.");
+      console.log("User created and loaded from DB.");
     }
   }
 
