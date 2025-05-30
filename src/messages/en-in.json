@@ -118,9 +118,12 @@
     "passwordFormCurrent": "Current Password",
     "passwordFormNewPassword": "New Password",
     "passwordFormConfirmPassword": "Confirm Password",
-    "passwordFormButton": "Update Password"
+    "passwordFormButton": "Update Password",
+    "passwordless": "Thanks for using passwordless login — a faster and safer way to sign in!",
+    "nopassword": "To update password you need to login with "
   },
   "profilePage": {
+    "loading": "Loading...",
     "title": "Profile",
     "description": "Update your name, contact info keep your account up to date.",
     "profilePicText": "Add a profile picture to make your account feel more like you.",
@@ -181,5 +184,14 @@
     "title": "Access Denied",
     "description": "You must be logged in to view this page. Redirecting to sign-in...",
     "buttonText": "Sign In"
+  },
+  "toastMessage": {
+    "textFieldFullName": "Name updated",
+    "textFieldDOB": "Date of Birth updated",
+    "textFieldGender": "Gender updated",
+    "textFieldEmail": "Email updated",
+    "textFieldPhone": "Phone number updated",
+    "textFieldCountry": "Country updated",
+    "textFieldPassword": "Password updated"
   }
 }

@@ -14,6 +14,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RootState } from "@/types/stateTypes";
 import { userSetDOB } from "@/controllers/slices/userSlice";
+import supabase from "@/lib/supabase/supabase";
+import { toast } from "react-toastify";
 
 export default function EditDOBAction() {
   const dispatch = useDispatch();
@@ -23,11 +25,28 @@ export default function EditDOBAction() {
   const [dateofbirth, setDob] = React.useState<Date | null>(
     dob ? new Date(dob) : null
   );
+  const tm = useTranslations("toastMessage");
   const [touched, setTouched] = React.useState<boolean>(false);
-
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const uid = useSelector((state: RootState) => state.user.uid!);
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(userSetDOB(dateofbirth?.toISOString() || ""));
+    const { data, error: selectError } = await supabase
+      .from("users")
+      .update({ dob: dateofbirth?.toISOString() || "" })
+      .eq("uid", uid)
+      .select()
+      .single();
+
+    if (data) {
+      toast(tm("textFieldDOB"), { type: "success" });
+    }
+
+    if (selectError && selectError.code !== "PGRST116") {
+      console.error("Supabase select error:", selectError.message);
+      toast(selectError.message, { type: "error" });
+      return;
+    }
     setDob(null);
     dispatch(dialogReset());
   };

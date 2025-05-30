@@ -8,15 +8,36 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { RootState } from "@/types/stateTypes";
 import { userSetGender } from "@/controllers/slices/userSlice";
+import supabase from "@/lib/supabase/supabase";
+import { toast } from "react-toastify";
 export default function EditGenderAction() {
   const dispatch = useDispatch();
   const t = useTranslations("profilePage");
   const [selectGender, setSelectGender] = React.useState<string>("");
   const gender = useSelector((state: RootState) => state.user.gender);
+  const uid = useSelector((state: RootState) => state.user.uid!);
   const [touched, setTouched] = React.useState<boolean>(false);
-
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const tm = useTranslations("toastMessage");
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { data, error: selectError } = await supabase
+      .from("users")
+      .update({ gender: selectGender })
+      .eq("uid", uid)
+      .select()
+      .single();
+
+    if (data) {
+      console.log(gender);
+      toast(tm("textFieldGender"), { type: "success" });
+    }
+
+    if (selectError && selectError.code !== "PGRST116") {
+      console.error("Supabase select error:", selectError.message);
+      toast(selectError.message, { type: "error" });
+      return;
+    }
+
     dispatch(userSetGender(selectGender));
     dispatch(dialogReset());
   };

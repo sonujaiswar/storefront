@@ -10,6 +10,8 @@ import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
 import { RootState } from "@/types/stateTypes";
 import { setLocationSave } from "@/controllers/slices/locationSlice";
 import { countriesAndSubdivisionsTypes } from "@/types/utils/countriesAndSubdivisionsTypes";
+import supabase from "@/lib/supabase/supabase";
+import { toast } from "react-toastify";
 
 export default function EditLocationAction() {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ export default function EditLocationAction() {
   const countryCode = useSelector(
     (state: RootState) => state.location.area.countryCode
   );
+  const uid = useSelector((state: RootState) => state.user.uid!);
   const provinceCode = useSelector(
     (state: RootState) => state.location.area.provinceCode
   );
@@ -53,9 +56,29 @@ export default function EditLocationAction() {
         ?.subdivisions.find((s) => s.code === provinceCode) || null
     );
   }, [countryCode, provinceCode]);
-
-  function handleSave(e: React.FormEvent<HTMLFormElement>) {
+  const tm = useTranslations("toastMessage");
+  async function handleSave(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log(selectedCountryCode, selectedProvince);
+    const { data, error: selectError } = await supabase
+      .from("users")
+      .update({
+        country: selectedCountryCode?.countryCode,
+        subdivision: selectedProvince?.code,
+      })
+      .eq("uid", uid)
+      .select()
+      .single();
+
+    if (data) {
+      toast(tm("textFieldCountry"), { type: "success" });
+    }
+
+    if (selectError && selectError.code !== "PGRST116") {
+      console.error("Supabase select error:", selectError.message);
+      toast(selectError.message, { type: "error" });
+      return;
+    }
     dispatch(
       setLocationSave({
         area: {

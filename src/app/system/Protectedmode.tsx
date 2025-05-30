@@ -7,6 +7,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useRouter, usePathname } from "next/navigation";
 import AccessDenied from "@/components/ui/AccessDenied/Action";
 import { auth } from "@/lib/firebase/firebaseAuth";
+import AuthLoading from "@/components/layouts/authloading/AuthLoading";
+import { Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 export default function ProtectedMode({
   children,
@@ -16,6 +19,7 @@ export default function ProtectedMode({
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("profilePage");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,6 +48,16 @@ export default function ProtectedMode({
   if (!loading && !authenticated) {
     return <AccessDenied />;
   }
-
+  if (loading) {
+    return (
+      <>
+        <AuthLoading>
+          <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+            {t("loading")}
+          </Typography>
+        </AuthLoading>
+      </>
+    );
+  }
   return <>{children}</>;
 }

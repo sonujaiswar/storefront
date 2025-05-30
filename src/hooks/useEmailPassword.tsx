@@ -1,9 +1,12 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updatePassword,
+  User,
   UserCredential,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase/firebaseAuth";
@@ -16,12 +19,12 @@ export function useEmailPassword() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const { userAuthenticate } = useUserDispatch();
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || "";
 
-  // fn must return Promise<UserCredential>
   const handleAuth = async (fn: () => Promise<UserCredential>) => {
     try {
       setLoading(true);
@@ -30,12 +33,15 @@ export function useEmailPassword() {
       const userDetails = extractUserDetails(user);
       userAuthenticate(userDetails);
       return user;
-    } catch (error: unknown) {
-      if (error instanceof FirebaseError) {
-        setError(FirebaseErrorSimplified(error));
+    } catch (err: unknown) {
+      if (err instanceof FirebaseError) {
+        setError(FirebaseErrorSimplified(err));
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred.");
       }
       return null;
-      // setError((error as Error).message);
     } finally {
       setLoading(false);
     }
@@ -49,15 +55,38 @@ export function useEmailPassword() {
     const user = await handleAuth(() =>
       createUserWithEmailAndPassword(auth, email, password)
     );
-    if (user) {
-      const encodedCallback = encodeURIComponent(callbackUrl);
-      router.push(`/wizard?callbackUrl=${encodedCallback}`);
+    if (user && callbackUrl) {
+      router.push(`/wizard?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+    }
+  };
+
+  const updatePasswordFirebase = async (newPassword: string) => {
+    const currentUser: User | null = auth.currentUser;
+    if (currentUser) {
+      try {
+        setLoading(true);
+        await updatePassword(currentUser, newPassword);
+        setError(null);
+      } catch (err: unknown) {
+        if (err instanceof FirebaseError) {
+          setError(FirebaseErrorSimplified(err));
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setError("No user is currently signed in.");
     }
   };
 
   return {
     signInWithEmail,
     signUpWithEmail,
+    updatePasswordFirebase,
     error,
     loading,
   };

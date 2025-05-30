@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BProgress } from "@bprogress/core";
 import SessionMode from "./SessionMode";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function StateUI({
   children,
@@ -78,6 +79,7 @@ export default function StateUI({
           </PersistGate>
         </Provider>
       </ProgressProvider>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

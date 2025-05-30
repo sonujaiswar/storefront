@@ -8,6 +8,8 @@ import { dialogReset, dialogSetKey } from "@/controllers/slices/dialogSlice";
 import { countriesAndSubdivisions } from "@/utils/countriesAndSubdivisions";
 import { RootState } from "@/types/stateTypes";
 import { userSetPhone } from "@/controllers/slices/userSlice";
+import supabase from "@/lib/supabase/supabase";
+import { toast } from "react-toastify";
 
 export default function AccountAction() {
   const t = useTranslations("profilePage");
@@ -23,7 +25,8 @@ export default function AccountAction() {
   const countryData = countriesAndSubdivisions.find(
     (c) => c.countryCode === countryCode
   );
-
+  const uid = useSelector((state: RootState) => state.user.uid!);
+  const tm = useTranslations("toastMessage");
   const phoneNumberLength = countryData?.phoneLength || 10;
   const dialCode = countryData?.dialCode || 91;
   const phone = useSelector((state: RootState) => state.user.phone);
@@ -41,8 +44,25 @@ export default function AccountAction() {
     }
   };
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { data, error: selectError } = await supabase
+      .from("users")
+      .update({ phone: phoneNumber })
+      .eq("uid", uid)
+      .select()
+      .single();
+
+    if (data) {
+      toast(tm("textFieldPhone"), { type: "success" });
+    }
+
+    if (selectError && selectError.code !== "PGRST116") {
+      console.error("Supabase select error:", selectError.message);
+      toast(selectError.message, { type: "error" });
+      return;
+    }
 
     setTouched(true);
 
