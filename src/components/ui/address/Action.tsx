@@ -1,3 +1,4 @@
+import React from "react";
 import DialogModel from "@/components/layouts/dialog/DialogModel";
 import {
   addressResetForm,
@@ -42,7 +43,7 @@ export default function Addaddress() {
   const t = useTranslations("addressPage");
 
   return (
-    <>
+    <React.Fragment>
       <DialogModel
         dialogTitle={isEditing ? t("addressEditForm") : t("addressAddForm")}
       >
@@ -147,6 +148,6 @@ export default function Addaddress() {
           </DialogActions>
         </Box>
       </DialogModel>
-    </>
+    </React.Fragment>
   );
 }
