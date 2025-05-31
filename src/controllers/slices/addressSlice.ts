@@ -9,7 +9,9 @@ export interface AddressState {
 
 const initialState: AddressState = {
   addresses: [],
+
   addressForm: {
+    addressid: "",
     fullname: "",
     phone: "",
     addressline1: "",

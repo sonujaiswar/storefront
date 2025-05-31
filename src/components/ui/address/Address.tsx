@@ -31,6 +31,7 @@ export default function AddressList() {
   const handleEditAddress = (address: AddressTypes) => {
     dispatch(addressSetEditing(true));
     dispatch(addressSetForm(address));
+
     dispatch(dialogToggle());
   };
 
@@ -44,7 +45,7 @@ export default function AddressList() {
       .select("*")
       .eq("userid", id);
     dispatch(addressSetAll(data as AddressTypes[]));
-    if (data) {
+    if (data?.length! > 0) {
       toast.success("Addresses loaded");
     }
 
@@ -65,7 +66,7 @@ export default function AddressList() {
           <Card variant="outlined">
             <CardContent sx={{ minHeight: 240 }}>
               <Typography variant="subtitle1" fontWeight="bold">
-                {addr.fullname}
+                {addr.fullname} {addr.addressid}
               </Typography>
               <Typography>{addr.phone}</Typography>
               <Typography>{addr.addressline1}</Typography>

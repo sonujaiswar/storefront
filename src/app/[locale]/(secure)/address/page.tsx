@@ -14,7 +14,7 @@ import Addaddress from "@/components/ui/address/Action";
 import Address from "@/components/ui/address/Address";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
-import { dialogToggle } from "@/controllers/slices/dialogSlice";
+import { dialogSetKey, dialogToggle } from "@/controllers/slices/dialogSlice";
 import { addressSetEditing } from "@/controllers/slices/addressSlice";
 
 export default function CustomerAddressUI() {
@@ -35,7 +35,8 @@ export default function CustomerAddressUI() {
             <Card variant="outlined">
               <CardActionArea
                 onClick={() => {
-                  dispatch(dialogToggle());
+                  // dispatch(dialogToggle());
+                  dispatch(dialogSetKey("addaddress"));
                   dispatch(addressSetEditing(false));
                 }}
               >

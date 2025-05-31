@@ -1,4 +1,5 @@
 export interface AddressTypesUI {
+  addressid?: string;
   fullname: string;
   phone: string;
   addressline1: string;
