@@ -35,7 +35,12 @@ export default function AddressList() {
     dispatch(dialogToggle());
   };
 
-  const handleDeleteAddress = (id: string) => {
+  const handleDeleteAddress = async (id: string) => {
+    const { data, error } = await supabase
+      .from("user_addresses")
+      .delete()
+      .eq("addressid", id);
+
     dispatch(addressSetDelete(id));
   };
 
@@ -84,7 +89,7 @@ export default function AddressList() {
                   <Edit />
                 </IconButton>
                 <IconButton
-                  color="error"
+                  color="primary"
                   onClick={() => handleDeleteAddress(addr.addressid)}
                 >
                   <Delete />
