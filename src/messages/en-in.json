@@ -109,7 +109,8 @@
     "addressFormLandmark": "Landmark",
     "addressFormSave": "Save",
     "addressFormUpdate": "Update",
-    "addressFormCancel": "Cancel"
+    "addressFormCancel": "Cancel",
+    "addressFormSaving": "Saving..."
   },
   "securityPage": {
     "title": "Security Settings",
